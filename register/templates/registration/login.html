@@ -1,0 +1,34 @@
+{% extends 'IW/base.html' %}
+
+{% block title %}
+    Login
+{% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div id="container">
+        <div id="container-esq">
+            <!-- login, campos para nome e pass, botao login, href create account -->
+            <p style="color: white; font-size: 400%; text-align: center">Login</p>
+            <form method="POST" class="ui form">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="ui button" style="background-color: #e84545; color: white; font-size: 20px; border-radius: 25px; font-style: italic; margin: auto; margin-top: 10%; display: block;">Login</button>
+                <p style="font-style: italic; text-decoration: underline; color: white; text-align: center; padding-top: 20%">Don't have an account? Create one <a href="/register">here</a></p>
+            </form>
+        </div>
+        <div id="container-dir">
+            <!-- logo e nome -->
+            <div id="logo">
+                <svg width="250" height="250" viewBox="0 10 300 350" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M88.8885 88.8885V299.999L0 211.11V0L88.8885 88.8885ZM211.111 0.00061512H0.000915527L88.8894 88.8891H300L211.111 0.00061512Z" fill="#E84545"></path>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M211.112 211.111L211.112 0.0012207L300 88.8897V300L211.112 211.111ZM88.889 299.999H299.999L211.111 211.111L0.000488281 211.111L88.889 299.999Z" fill="#FBFBFB"></path>
+                </svg>
+            </div>
+            <div id="iselgg">
+                <p style="color: white; display: inline; font-size: 950%">ISEL.</p>
+                <p style="color: #e84545; display: inline; font-size: 950%">GG</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,53 @@
+body {
+    background: linear-gradient(to left bottom, #100D20 50%, #211C36 50%);
+}
+
+* {
+    font-family: "Contrail One", serif;
+    color: #fbfbfb;
+}
+
+h1, h2, h3, h4, h5, h6, div {
+    font-family: "Contrail One", serif;
+    color: #fbfbfb;
+}
+
+#container {
+    border-radius: 25px;
+    background: linear-gradient(90deg, #1a1630 50%, #130f26 50%);
+    width: 60%;
+    height: 75%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 54px 55px, rgba(0, 0, 0, 0.12) 0 -12px 30px, rgba(0, 0, 0, 0.12) 0 4px 6px, rgba(0, 0, 0, 0.17) 0 12px 13px, rgba(0, 0, 0, 0.09) 0 -3px 5px;
+}
+
+#container-esq {
+    width: 50%;
+    float: left;
+    padding: 10%;
+}
+
+#container-dir {
+    width: 50%;
+    float: right;
+}
+
+#logo {
+    padding-left: 27%;
+    padding-right: 27%;
+    padding-top: 25%;
+    height: 50%;
+}
+
+#iselgg {
+    height: 50%;
+    padding-left: 18%;
+    padding-right: 18%;
+}
+
+
