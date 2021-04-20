@@ -1,0 +1,37 @@
+<div id="container">
+    <div id="container-esq">
+        <div class="wrap">
+            <!-- login, campos para nome e pass, botao login, href create account -->
+            <p id="form-title">{% block form-title %}{form title here}{% endblock %}</p>
+            <form method="POST" class="ui form">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button id="submit-button" type="submit" class="ui button">{% block button-text %}{button text here}{% endblock %}</button>
+            {% block footer-info %}
+                {footer info here}
+            {% endblock %}
+                <p id="footer-info">Don't have an account? Create one <a href="/register">here</a></p>
+            </form>
+        </div>
+    </div>
+    <div id="container-dir">
+        <!-- logo e nome -->
+        <div class="wrap">
+            <div id="logo">
+                <svg width="14vw" height="14vw" viewBox="0 0 300 350" fill="none"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M88.8885 88.8885V299.999L0 211.11V0L88.8885 88.8885ZM211.111 0.00061512H0.000915527L88.8894 88.8891H300L211.111 0.00061512Z"
+                          fill="#E84545"></path>
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M211.112 211.111L211.112 0.0012207L300 88.8897V300L211.112 211.111ZM88.889 299.999H299.999L211.111 211.111L0.000488281 211.111L88.889 299.999Z"
+                          fill="#FBFBFB"></path>
+                </svg>
+            </div>
+            <div id="iselgg">
+                <span style="margin-right: -7px">ISEL</span>
+                <span style="color:var(--winner-red); margin-left: -13px">WINNER</span>
+            </div>
+        </div>
+    </div>
+</div>
