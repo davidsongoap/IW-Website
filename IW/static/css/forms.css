@@ -48,32 +48,6 @@
 }
 
 
-@media screen and (max-width: 933px) {
-    #container-dir {
-        display: none;
-    }
-
-    #container-esq {
-        width: 100%;
-        flex: 1;
-        padding: 20%;
-
-        border-radius: 25px
-    }
-
-    #container {
-        width: 70%;
-    }
-
-    #footer-info {
-        font-size: 20px;
-    }
-
-    #form-title {
-        font-size: 25px;
-    }
-}
-
 #container-create-tournament {
     border-radius: 25px;
     background-color: var(--form-color1);
@@ -115,9 +89,10 @@
 }
 
 #form-title {
-    margin: 0 0 10%;
+    margin: 0 0 5%;
     color: white;
-    font-size: 4vw;
+    font-size: 4vmax;
+
     text-align: center
 }
 
@@ -135,7 +110,7 @@
     /*padding-left: 5vw;*/
     /*padding-right: 5vw;*/
     padding-top: 5%;
-    font-size: 5vw;
+    font-size: 5vmax;
     text-align: center;
 }
 
@@ -151,7 +126,13 @@
     font-size: 1vw;
     color: white;
     text-align: center;
-    padding-top: 10%
+    padding-top: 20px
+}
+
+#form-description {
+    color: var(--font-color);
+    font-size: 1vmax;
+    text-align: center
 }
 
 #id_username, #id_password, #id_password1, #id_password2, #id_email, #id_confirmation_code,
@@ -159,8 +140,8 @@
 #id_image, #id_game_name, #id_code_name, #id_game_file, #id_author {
     font-family: var(--font);
     background-color: var(--winner-input-color);
-    color: #fbfbfb;
-    border-radius: 7px;
+    color: var(--font-color);
+    border-radius: 10px;
 }
 
 #id_description {
@@ -180,4 +161,50 @@
     display: block;
     padding-left: 10%;
     padding-right: 10%;
+}
+
+@media screen and (max-width: 1000px) {
+    #container-dir {
+        display: none;
+    }
+
+    #container-esq {
+        width: 100%;
+        padding: 20%;
+
+        border-radius: 25px
+    }
+
+    #container {
+        width: 70%;
+    }
+
+    #footer-info {
+        font-size: 20px;
+    }
+
+    #form-title {
+        font-size: 5vmax;
+    }
+
+    #form-description {
+        font-size: 2vmax;
+    }
+}
+@media screen and (max-width: 550px) {
+
+    body{
+
+        background-color: #100d20;
+        background-image: linear-gradient(160deg, #100000 0%, #211c36 100%);
+    }
+    #container{
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        border-radius: 0;
+    }
+    #container-esq {
+        border-radius:0
+    }
 }

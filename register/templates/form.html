@@ -13,14 +13,16 @@
         <div class="wrap">
             <!-- login, campos para nome e pass, botao login, href create account -->
             <p id="form-title">{% block form-title %}{form title here}{% endblock %}</p>
+        {% block form-description %}
+            {% endblock %}
             <form method="POST" class="ui form">
                 {% csrf_token %}
                 {{ form|crispy }}
                 <button id="submit-button" type="submit" class="ui button">{% block button-text %}{button text here}{% endblock %}</button>
-            {% block footer-info %}
 
-                <p id="footer-info">{footer info here}</p>
-            {% endblock %}
+                {% block footer-info %}
+                {% endblock %}
+
 
             </form>
         </div>

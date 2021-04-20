@@ -1,12 +1,17 @@
-
 {% extends 'form.html' %}
+
+{% block title %}
+    Login
+{% endblock %}
 
 {% block form-title %}
     Login
 {% endblock %}
+
 {% block button-text %}
     Login
 {% endblock %}
+
 {% block footer-info %}
-    Don't have an account? Create one <a href="/register">here</a>
+    <p id="footer-info"> Don't have an account? Create one <a href="/register">here</a></p>
 {% endblock %}
