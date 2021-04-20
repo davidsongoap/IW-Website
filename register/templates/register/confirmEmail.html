@@ -1,40 +1,22 @@
-{% extends 'IW/base.html' %}
-
+{% extends 'form.html' %}
 
 {% block title %}
+    Email Confirmation
+{% endblock %}
+
+{% block form-title %}
     Confirm Email
 {% endblock %}
-{% load crispy_forms_tags %}
 
-{% load static %}
-{% block css %}
-    <link rel="stylesheet" href="{% static 'css/forms.css' %}">
+
+{% block form-description %}
+    <p id="form-description">We sent an email to email@domain.pt</p>
 {% endblock %}
-{% block content %}
-    <div id="container">
-        <div id="container-esq">
-            <!-- confirm email, campo para confirmation code, href resend code -->
-            <p id="form-title">Confirm Email</p>
-            <p style="color: white; font-size: 1vw; text-align: center">We sent an email to email@domain.pt</p>
-            <form method="POST" class="ui form">
-                {% csrf_token %}
-                {{ form|crispy }}
-                <button  id="submit-button" type="submit" class="ui button">Confirm</button>
-                <p style="font-size: 1vw; text-decoration: underline; color: white; text-align: center; padding-top: 20%">Didn't get the email? <a href="">Resend</a></p>
-            </form>
-        </div>
-        <div id="container-dir">
-            <!-- logo e nome -->
-            <div id="logo">
-                <svg width="14vw" height="14vw" viewBox="0 10 300 350" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M88.8885 88.8885V299.999L0 211.11V0L88.8885 88.8885ZM211.111 0.00061512H0.000915527L88.8894 88.8891H300L211.111 0.00061512Z" fill="#E84545"></path>
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M211.112 211.111L211.112 0.0012207L300 88.8897V300L211.112 211.111ZM88.889 299.999H299.999L211.111 211.111L0.000488281 211.111L88.889 299.999Z" fill="#FBFBFB"></path>
-                </svg>
-            </div>
-            <div id="iselgg">
-                <p style="color: white; display: inline; font-size: 7vw">ISEL.</p>
-                <p style="color: #e84545; display: inline; font-size: 7vw">Winner</p>
-            </div>
-        </div>
-    </div>
+
+{% block button-text %}
+    Confirm
+{% endblock %}
+
+{% block footer-info %}
+    <p id="footer-info"> Didn't get the email? <a href="/register">Resend</a></p>
 {% endblock %}
