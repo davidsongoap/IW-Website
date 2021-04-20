@@ -1,10 +1,39 @@
+
+:root {
+    --font: "Contrail One";
+    --dark-bg: #100D20;
+    --light-bg: #211C36;
+    --font-color: #fbfbfb;
+
+    /* basic colors */
+    --disabled-color: #241F38;
+    --winner-red: #E84545;
+    --winner-green: #64BB6A;
+    --winner-yellow: #FCE16D;
+
+    /* forms */
+    --form-color1: #1a1630;
+    --form-color2: #130f26;
+    --winner-input-color: #57536A;
+
+    /* shadows */
+    --shadow1: rgba(0, 0, 0, 0.25) 0 54px 55px, rgba(0, 0, 0, 0.12) 0 -12px 30px, rgba(0, 0, 0, 0.12) 0 4px 6px, rgba(0, 0, 0, 0.17) 0 12px 13px, rgba(0, 0, 0, 0.09) 0 -3px 5px;
+
+    /* scrollbar */
+    --scrollbar-default: #4C4A55;
+    --scrollbar-hover: #555264;
+    --scrollbar-background: var(--dark-bg);
+}
+
 body {
-    background: linear-gradient(to left bottom, #100D20 50%, #211C36 50%);
+    background: var(--light-bg) linear-gradient(to left bottom, var(--dark-bg) 50%, var(--light-bg) 50%) no-repeat;
+    z-index: 1;
+    height: 100%;
 }
 
 * {
     font-family: "Contrail One", serif;
-    color: #fbfbfb;
+    color: var(--font-color);
 }
 
 h1, h2, h3, h4, h5, h6, div {
@@ -12,42 +41,84 @@ h1, h2, h3, h4, h5, h6, div {
     color: #fbfbfb;
 }
 
-#container {
-    border-radius: 25px;
-    background: linear-gradient(90deg, #1a1630 50%, #130f26 50%);
-    width: 60%;
-    height: 75%;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    box-shadow: rgba(0, 0, 0, 0.25) 0 54px 55px, rgba(0, 0, 0, 0.12) 0 -12px 30px, rgba(0, 0, 0, 0.12) 0 4px 6px, rgba(0, 0, 0, 0.17) 0 12px 13px, rgba(0, 0, 0, 0.09) 0 -3px 5px;
+
+.container .card .content {
+    background-color: rgba(2, 2, 2, 0);
 }
 
-#container-esq {
-    width: 50%;
-    float: left;
-    padding: 10%;
+#t-card-content {
+    background-color: #130F26;
 }
 
-#container-dir {
-    width: 50%;
-    float: right;
+#t-card-content .header {
+    background-color: #130F26;
+    font-size: 22px;
+    color: #fbfbfb;
 }
 
-#logo {
-    padding-left: 27%;
-    padding-right: 27%;
-    padding-top: 25%;
-    height: 50%;
+.status-icon-red {
+    color: var(--winner-red);
 }
 
-#iselgg {
-    height: 50%;
-    padding-left: 18%;
-    padding-right: 18%;
+.status-icon-green {
+    color: var(--winner-green);
 }
 
+.status-icon-yellow {
+    color: var(--winner-yellow);
+}
 
+.status-icon-grey {
+    color: var(--disabled-color);
+}
+
+.t-card-date {
+    font-size: 20px;
+    padding-top: 40px;
+    margin-top: 40px;
+}
+
+#enroll-button {
+    border-radius: 7px 7px 7px 7px;
+}
+
+#results-button {
+    border-radius: 7px 7px 7px 7px;
+}
+
+#t-card {
+    box-shadow: var(--shadow1);
+    color: #fbfbfb;
+    /*border-radius: 15px 15px 0 0;*/
+    border-radius: 28px;
+    background-color: #130F26;
+
+}
+
+#t-card img {
+    box-shadow: var(--shadow1);
+    border-radius: 7px 7px 0 0;
+}
+
+#t-dimmer .content .center {
+    border-radius: 7px 7px 0 0;
+}
+
+/* Custom Scrollbar*/
+::-webkit-scrollbar {
+    width: 11px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--scrollbar-background);
+    border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-default);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-hover)
+}

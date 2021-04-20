@@ -5,3 +5,7 @@ dgit.bat
 IW/__pycache__/
 IselWinner/__pycache__/
 register/__pycache__/
+rgit.bat
+__pycache__/
+register/migrations/*
+IW/migrations/*

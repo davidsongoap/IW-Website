@@ -17,12 +17,14 @@ def create(response):
 
 
 def tournaments(response):
-    args = {}
+    args = {
+        "range": range(12)
+    }
     return render(response, "IW/tournaments.html", args)
 
 
 def tournament(response, id):
     args = {
-        "id": id
+        "t_name": id
     }
     return render(response, "IW/tournament.html", args)

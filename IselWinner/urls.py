@@ -15,12 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
 from register import views as v
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('register/', v.register, name="register"),
+    path('register/', v.register, name="register"),  # pagina de registo no website
+    path("confirmEmail/", v.confirm, name="confirm"),  # pagina de confirmaçao de email
+    path("createTournament/", v.create_tournament, name="create"),  # pagina para criar torneios
+    path("uploadGame/", v.upload_game, name="upload"),  # pagina para dar upload a jogos
     path('', include("IW.urls")),
     path('', include("django.contrib.auth.urls")),
+
 ]
