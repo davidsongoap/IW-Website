@@ -1,7 +1,8 @@
 {% extends 'IW/base.html' %}
 
+
 {% block title %}
-    Login
+    Confirm Email
 {% endblock %}
 {% load crispy_forms_tags %}
 
@@ -9,17 +10,17 @@
 {% block css %}
     <link rel="stylesheet" href="{% static 'css/forms.css' %}">
 {% endblock %}
-
 {% block content %}
-    <div  id="container">
+    <div id="container">
         <div id="container-esq">
-            <!-- login, campos para nome e pass, botao login, href create account -->
-            <p style="color: white; font-size: 4vw; text-align: center">Login</p>
+            <!-- confirm email, campo para confirmation code, href resend code -->
+            <p style="color: white; font-size: 3vw; text-align: center">Confirm Email</p>
+            <p style="color: white; font-size: 1vw; text-align: center">We sent an email to email@domain.pt</p>
             <form method="POST" class="ui form">
                 {% csrf_token %}
                 {{ form|crispy }}
-                <button id="submit-button" type="submit" class="ui button">Login</button>
-                <p style="font-size: 1vw; color: white; text-align: center; padding-top: 20%">Don't have an account? Create one <a href="/register">here</a></p>
+                <button id="submit-button" type="submit" class="ui button">Confirm</button>
+                <p style="font-size: 1vw; text-decoration: underline; color: white; text-align: center; padding-top: 20%">Didn't get the email? <a href="">Resend</a></p>
             </form>
         </div>
         <div id="container-dir">

@@ -2,3 +2,8 @@ venv/
 .idea/
 NULL
 dgit.bat
+rgit.bat
+__pycache__/
+register/migrations/*
+IW/migrations/*
+IW/

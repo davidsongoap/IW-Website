@@ -1,3 +1,6 @@
+body{
+    background-color: var(--light-bg) none;
+}
 #navbar .item {
     margin: 0;
     color: #fbfbfb;
@@ -14,11 +17,15 @@
 }
 
 #navbar {
+    z-index: 6;
     padding: 0;
     margin: 0;
     background-color: #130F26;
     height: 30px;
     box-shadow: rgba(0, 0, 0, 0.19) 0 10px 20px, rgba(0, 0, 0, 0.23) 0 6px 6px;
+    position: relative;
+    position: sticky;
+    width: 100%;
 }
 
 #navbar #tourn-name {

@@ -1,0 +1,40 @@
+{% extends 'IW/base.html' %}
+{% load crispy_forms_filters %}
+
+{% block title %}
+    Create New Tournament
+{% endblock %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/forms.css' %}">
+{% endblock %}
+
+{% block content %}
+    {% include "IW/navbar.html" %}
+    <div id="container-create-tournament">
+        <!-- create tournament, campos para name, game(dropdown), pass, visibility, max_players, date, description, imagem, href tournaments -->
+        <div id="container-create-top">
+            <p style="color: white; font-size: 2.5vw; text-align: center">Create a Tournament</p>
+        </div>
+        <div id="container-create-tournament-esq">
+            <p style="color: white; font-size: 1.2vw;">Name</p>
+            <p style="color: white; font-size: 1.2vw;">Game Name</p>
+            <p style="color: white; font-size: 1.2vw;">Visibility</p>
+            <p style="color: white; font-size: 1.2vw;">Password</p>
+            <p style="color: white; font-size: 1.2vw;">Max Players</p>
+            <p style="color: white; font-size: 1.2vw;">Start Date</p>
+            <p style="color: white; font-size: 1.2vw;">Image</p>
+            <p style="color: white; font-size: 1.2vw;">Description</p>
+        </div>
+        <div id="container-create-tournament-dir">
+            <form id="form" method="POST" class="ui form">
+                {% csrf_token %}
+                {{ form|crispy }}
+            </form>
+        </div>
+        <div id="container-create-bottom">
+            <button form="form" type="submit" class="ui button" style="background-color: #e84545; color: white; font-size: 1vw; border-radius: 25px; margin: 10% auto;display: block;">Create</button>
+        </div>
+    </div>
+{% endblock %}

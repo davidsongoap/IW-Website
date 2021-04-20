@@ -1,11 +1,396 @@
 {% extends 'IW/base.html' %}
+{% load static %}
 
+{% block css %}
+
+    <link rel="stylesheet" href="{% static 'css/bracket.css' %}">
+    <style>
+        body {
+            background: #211C36 none;
+         }
+    </style>
+{% endblock %}
 {% block title %}
     Tournament
 {% endblock %}
 
-{% block content %}
+{% block nav %}
     {% include "IW/navbar.html" %}
-    <h1>Tournament Page</h1>
-    <h1>ID: {{ id }}</h1>
+{% endblock %}
+
+{% block content %}
+    {#    <h1>Tournament Page</h1>#}
+    <div style=";display: flex;overflow: auto; height: calc(100vh - 40px);">
+        <div style="
+                width:250px; /* or whatever width you want. */
+                float:left;
+                height: 100%;
+                min-height: 700px;
+                background:#130F26;
+                padding: 10px;
+                background: linear-gradient(0deg, rgba(33,28,54,1) 0%, rgba(19,15,38,1) 15%);
+                ">
+            <div id="mycard" class="ui card">
+                <div id="t_image" style="" class="image">
+                    <img src="{% static 'images/ceifador-mascote-logotipo-design_142989-234.jpg' %}" alt="">
+                </div>
+                <div class="content" style="padding: 0; border-color:#130F26">
+                    <div class="description">
+                        <table class="ui celled unstackable very compact table">
+                            <tbody>
+                            <tr>
+                                <td><i class=" ui white qrcode icon"></i></td>
+                                <td>YSDI4NV</td>
+                            </tr>
+                            <tr>
+                                <td><i class=" ui white globe icon"></i></td>
+                                <td>Public</td>
+                            </tr>
+                            <tr>
+                                <td><i class=" ui white university icon"></i></td>
+                                <td>Instituto Superior de Engenharia de Lisboa</td>
+                            </tr>
+                            <tr>
+                                <td><i class=" ui white calendar alternate outline icon"></i></td>
+                                <td>23 / 3 / 2021</td>
+                            </tr>
+                            <tr>
+                                <td><i class=" ui white user icon"></i></td>
+                                <td>a_teofilo</td>
+                            </tr>
+                            <tr>
+                                <td><i class=" ui white gamepad icon"></i></td>
+                                <td>Super Connect 4</td>
+                            </tr>
+                            <tr>
+                                <td><i class=" ui white users icon"></i></td>
+                                <td>9</td>
+                            </tr>
+                            <tr>
+                                <td><i class=" ui white align justify icon"></i></td>
+                                <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                    incididunt ut labore et dolore magna aliqua.
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div style="text-align: center">
+
+                            <button style="margin-bottom: 10px" id="enroll-button"
+                                    class=" ui inverted large white button">Edit</button>
+
+                            <button id="enroll-button"
+                                    class=" ui inverted large red button">Enroll</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style=" flex: 0 0 100px">
+            <div
+                    style="width: max-content; padding-right: 0; float: left; overflow-x:visible "
+                    class="my_gracket"
+            ></div>
+        </div>
+{#    <div style="background-color: red;position: page;  flex: 0 0 100px;">asdasda</div>#}
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $('.context.example.ui.sidebar')
+            .sidebar({
+                context: $('.context.example .bottom.segment'),
+                dimPage: false
+            })
+            .sidebar('attach events', '.context.example .menu .item');
+    </script>
+
+    <script type="text/javascript" src="{% static '/js/jquery.gracket.js' %}"></script>
+
+    <script type="text/javascript">
+        (function (win, doc, $) {
+
+            // Fake Data
+            win.TestData = [
+                [
+                    [
+                        {
+                            name: "Joe ",
+                            id: "erik-zettersten",
+                            seed: 1,
+                            score: 0,
+                        },
+                        {
+                            name: "Paulo",
+                            id: "andrew-miller",
+                            seed: 2,
+                            score: 1,
+                        },
+                    ],
+                    [
+                        {
+                            name: "James Coutry",
+                            id: "james-coutry",
+                            seed: 3,
+                            score: 134,
+                        },
+                        {
+                            name: "Sam Merrill",
+                            id: "sam-merrill",
+                            seed: 4,
+                            score: 134,
+                        },
+                    ],
+                    [
+                        {
+                            name: "Anothy Hopkins",
+                            id: "anthony-hopkins",
+                            seed: 5,
+                            score: 134,
+                        },
+                        {
+                            name: "Everett Zetters",
+                            id: "everett-zettersten",
+                            seed: 6,
+                            score: 134,
+                        },
+                    ],
+                    [
+                        {
+                            name: "John Scott",
+                            id: "john-scott",
+                            seed: 7,
+                            score: 134,
+                        },
+                        {
+                            name: "Teddy Koufus",
+                            id: "teddy-koufus",
+                            seed: 8,
+                            score: 134,
+                        },
+                    ],
+                    [
+                        {
+                            name: "Arnold Palmer",
+                            id: "arnold-palmer",
+                            seed: 9,
+                            score: 134,
+                        },
+                        {
+                            name: "Ryan Anderson",
+                            id: "ryan-anderson",
+                            seed: 10,
+                            score: 134,
+                        },
+                    ],
+                    [
+                        {name: "Jesse James", id: "jesse-james", seed: 1, score: 134},
+                        {
+                            name: "Scott Anderson",
+                            id: "scott-anderson",
+                            seed: 12,
+                            score: 134,
+                        },
+                    ],
+                    [
+                        {name: "Josh Groben", id: "josh-groben", seed: 13, score: 134},
+                        {
+                            name: "Sammy Zetters",
+                            id: "sammy-zettersten",
+                            seed: 14,
+                            score: 134,
+                        },
+                    ],
+                    [
+                        {name: "Jake Coutry", id: "jake-coutry", seed: 15, score: 134},
+                        {
+                            name: "Spencer Zetters",
+                            id: "spencer-zettersten",
+                            seed: 16,
+                            score: 134,
+                        },
+                    ],
+                ], // fim primeira ronda
+                [
+                    [
+                        {
+                            name: "Erik Zettersten",
+                            id: "erik-zettersten",
+                            seed: 1,
+                            score: 134,
+                        },
+                        {
+                            name: "James Coutry",
+                            id: "james-coutry",
+                            seed: 3,
+                            score: 134,
+                        },
+                    ],
+                    [
+                        {name: "Anothy Hopkins", id: "anthony-hopkins", seed: 5},
+                        {
+                            name: "Teddy Koufus",
+                            id: "teddy-koufus",
+                            seed: 8,
+                            score: 134,
+                        },
+                    ],
+                    [
+                        {name: "Ryan Anderson", id: "ryan-anderson", seed: 10},
+                        {
+                            name: "Scott Anderson",
+                            id: "scott-anderson",
+                            seed: 12,
+                            score: 134,
+                        },
+                    ],
+                    [
+                        {name: "Sammy Zetters", id: "sammy-zettersten", seed: 14},
+                        {
+                            name: "Jake Coutry",
+                            id: "jake-coutry",
+                            seed: 15,
+                        },
+                    ],
+                ], // fim segunda ronda
+                [
+                    [
+                        {name: "Erik Zettersten", id: "erik-zettersten", seed: 1},
+                        {
+                            name: "Anothy Hopkins",
+                            id: "anthony-hopkins",
+                            seed: 5,
+                        },
+                    ],
+                    [
+                        {name: "Ryan Anderson", id: "ryan-anderson", seed: 10, score: 1},
+                        {
+                            name: "Sammy Zetters",
+                            id: "sammy-zettersten",
+                            seed: 14,
+                        },
+                    ],
+                ], // fim terceira ronda
+                [
+                    [
+                        {name: "Erik Zettersten", id: "erik-zettersten", seed: 1},
+                        {
+                            name: "Ryan Anderson",
+                            id: "ryan-anderson",
+                            seed: 10,
+                        },
+                    ],
+                ], // fim quarta ronda
+                [[{name: "Erik Zettersten", id: "erik-zettersten", seed: 1}]], // vencedor
+            ];
+
+            {#// Fake Data#}
+            {#win.TestData = [#}
+            {#    [#}
+            {#        [#}
+            {#            {#}
+            {#                name: "Erik Zettersten",#}
+            {#                id: "erik-zettersten",#}
+            {#                seed: 1,#}
+            {#                score: 160,#}
+            {#            },#}
+            {#            {#}
+            {#                name: "Andrew Miller",#}
+            {#                id: "andrew-miller",#}
+            {#                seed: 2,#}
+            {#                score: 122,#}
+            {#            },#}
+            {#        ],#}
+            {#        [#}
+            {#            {#}
+            {#                name: "James Coutry",#}
+            {#                id: "james-coutry",#}
+            {#                seed: 3,#}
+            {#                score: 134,#}
+            {#            },#}
+            {#            {#}
+            {#                name: "Sam Merrill",#}
+            {#                id: "sam-merrill",#}
+            {#                seed: 4,#}
+            {#                score: 134,#}
+            {#            },#}
+            {#        ],#}
+            {#        [#}
+            {#            {#}
+            {#                name: "Anothy Hopkins",#}
+            {#                id: "anthony-hopkins",#}
+            {#                seed: 5,#}
+            {#                score: 134,#}
+            {#            },#}
+            {#            {#}
+            {#                name: "Everett Zetters",#}
+            {#                id: "everett-zettersten",#}
+            {#                seed: 6,#}
+            {#                score: 134,#}
+            {#            },#}
+            {#        ],#}
+            {#        [#}
+            {#            {#}
+            {#                name: "John Scott",#}
+            {#                id: "john-scott",#}
+            {#                seed: 7,#}
+            {#                score: 134,#}
+            {#            },#}
+            {#            {#}
+            {#                name: "Teddy Koufus",#}
+            {#                id: "teddy-koufus",#}
+            {#                seed: 8,#}
+            {#                score: 134,#}
+            {#            },#}
+            {#        ],#}
+            {#    ], // fim primeira ronda#}
+            {#    [#}
+            {#        [#}
+            {#            {#}
+            {#                name: "Erik Zettersten",#}
+            {#                id: "erik-zettersten",#}
+            {#                seed: 1,#}
+            {#                score: 134,#}
+            {#            },#}
+            {#            {#}
+            {#                name: "James Coutry",#}
+            {#                id: "james-coutry",#}
+            {#                seed: 3,#}
+            {#                score: 134,#}
+            {#            },#}
+            {#        ],#}
+            {#        [#}
+            {#            {#}
+            {#                name: "Anothy Hopkins",#}
+            {#                id: "anthony-hopkins",#}
+            {#                seed: 5#}
+            {#            },#}
+            {#            {#}
+            {#                name: "Teddy Koufus",#}
+            {#                id: "teddy-koufus",#}
+            {#                seed: 8,#}
+            {#                score: 134,#}
+            {#            },#}
+            {#        ],#}
+            {#    ], // fim segunda ronda#}
+            {#    [#}
+            {#        [#}
+            {#            {name: "Erik Zettersten", id: "erik-zettersten", seed: 1},#}
+            {#            {#}
+            {#                name: "Anothy Hopkins",#}
+            {#                id: "anthony-hopkins",#}
+            {#                seed: 5,#}
+            {#            },#}
+            {#        ],#}
+            {#    ], // fim terceira ronda#}
+            {#    [[{name: "Erik Zettersten", id: "erik-zettersten", seed: 1}]], // vencedor#}
+            {#];#}
+
+            // initializer
+            $(".my_gracket").gracket({src: win.TestData});
+        })(window, document, jQuery);
+    </script>
 {% endblock %}

@@ -1,10 +1,99 @@
 {% extends 'IW/base.html' %}
+{% load static %}
 
 {% block title %}
     Tournaments List
 {% endblock %}
 
-{% block content %}
+{% block nav %}
+
     {% include "IW/navbar.html" %}
-    <h1>Tournaments List Page</h1>
+{% endblock %}
+
+{% block content %}
+    <h1 style="text-align: center;font-size: 45px">Tournaments List</h1>
+
+
+    <div class="ui container fitted special cards">
+        {% for i in range %}
+            <div id="t-card" class="card">
+                <div id="t-dimmer" class=" dimmable image">
+                    <div class="ui dimmer">
+                        <div class="content">
+                            <div class="center">
+                                <div id="results-button" onclick="window.location='/tournament/AwesomeName_{{ i }}'"
+                                     class="ui inverted button">See Results
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% if i == 0 %}
+                        <img src="{% static 'images/skulls.jpg' %}" alt="">
+                    {% elif i == 2 %}
+                        <img src="{% static 'images/optimized_large_thumb_stage.jpg' %}" alt="">
+                    {% elif i == 1 %}
+                        <img src="{% static 'images/reaper.jpg' %}" alt="">
+                    {% else %}
+                        <img src="{% static 'images/gamer.png' %}" alt="">
+                    {% endif %}
+                </div>
+                <div id="t-card-content" class="t-card-content content ">
+                    <div class="header">
+                       <span>
+                           {% if i == 0 %}
+                               <i class="status-icon-red circle icon"></i>
+                           {% elif i == 2 %}
+                               <i class="status-icon-green circle icon"></i>
+                           {% elif i == 1 %}
+                               <i class="status-icon-yellow circle icon"></i>
+                           {% else %}
+
+                               <i class="status-icon-grey circle icon"></i>
+                           {% endif %}
+                       </span>
+                        <span>ISEL CHAMPIONSHIP SERIES</span>
+                    </div>
+                </div>
+                <div class="ui fitted divider"></div>
+                <div id="t-card-content" class="extra content">
+                  <span class="t-card-date">
+                    21 / 3 / 2021
+                  </span>
+                    <span>
+                        {% if i == 0 %}
+                            <button id="enroll-button"
+                                    class=" ui right floated inverted red button">Enroll</button>
+                        {% elif i == 1 %}
+                            <button id="enroll-button"
+                                    class=" loading ui right floated inverted red button">Enroll</button>
+                        {% elif i == 2 %}
+                            <button id="enroll-button"
+                                    class="disabled  ui right floated inverted red button">Already Enrolled</button>
+                        {% else %}
+                            <button id="enroll-button"
+                                    class="ui right floated inverted secondary disabled button">Enroll</button>
+                        {% endif %}
+      </span>
+                </div>
+            </div>
+
+        {% endfor %}
+
+    </div>
+{% endblock %}
+
+{% block scripts %}
+
+    <script>
+
+        $(document).ready(function () {
+            $('.special.cards .image').dimmer({
+                on: 'hover',
+                duration: {
+                    show: 400,
+                    hide: 400
+                }
+            });
+        });
+    </script>
 {% endblock %}
