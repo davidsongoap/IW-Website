@@ -7,5 +7,5 @@ IselWinner/__pycache__/
 register/__pycache__/
 rgit.bat
 __pycache__/
-register/migrations/*
-IW/migrations/*
+register/migrations/
+IW/migrations/
