@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Contrail+One"
+    />
+    <title>ISEL WINNER</title>
+    <!--     <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">-->
+    <!-- basic styles -->
+    <style type="text/css">
+    </style>
+
+    <!-- dependencies -->
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT"
+            crossorigin="anonymous"
+    ></script>
+
+    <!-- main lib -->
+    <script type="text/javascript" src="jquery.gracket.js"></script>
+    <!--    <script type="text/javascript" src="test.js"></script>-->
+</head>
+
+<body>
+<!--<h2>jQuery Gracket.js: Single Elimation Tournament Bracket Generator Example</h2>-->
+
+<!-- empty gracket element -->
+<div style="overflow: scroll;position: absolute; width: max-content;">
+    <div
+            style="
+            padding-right: 0;
+            overflow: hidden;
+            "
+            class="my_gracket"
+    ></div>
+</div>
+<script type="text/javascript">
+    (function (win, doc, $) {
+        console.warn(
+            "Make sure the min-width of the .gracket_h3 element is set to width of the largest name/player. Gracket needs to build its canvas based on the width of the largest element. We do this my giving it a min width. I'd like to change that!"
+        );
+
+        // Fake Data
+        win.TestData = [
+            [
+                [
+                    {
+                        name: "Erik Zettersten",
+                        id: "erik-zettersten",
+                        seed: 1,
+                        score: 160,
+                    },
+                    {
+                        name: "Andrew Miller",
+                        id: "andrew-miller",
+                        seed: 2,
+                        score: 122,
+                    },
+                ],
+                [
+                    {
+                        name: "James Coutry",
+                        id: "james-coutry",
+                        seed: 3,
+                        score: 134,
+                    },
+                    {
+                        name: "Sam Merrill",
+                        id: "sam-merrill",
+                        seed: 4,
+                        score: 134,
+                    },
+                ],
+                [
+                    {
+                        name: "Anothy Hopkins",
+                        id: "anthony-hopkins",
+                        seed: 5,
+                        score: 134,
+                    },
+                    {
+                        name: "Everett Zettersten",
+                        id: "everett-zettersten",
+                        seed: 6,
+                        score: 134,
+                    },
+                ],
+                [
+                    {
+                        name: "John Scott",
+                        id: "john-scott",
+                        seed: 7,
+                        score: 134,
+                    },
+                    {
+                        name: "Teddy Koufus",
+                        id: "teddy-koufus",
+                        seed: 8,
+                        score: 134,
+                    },
+                ],
+                [
+                    {
+                        name: "Arnold Palmer",
+                        id: "arnold-palmer",
+                        seed: 9,
+                        score: 134,
+                    },
+                    {
+                        name: "Ryan Anderson",
+                        id: "ryan-anderson",
+                        seed: 10,
+                        score: 134,
+                    },
+                ],
+                [
+                    {name: "Jesse James", id: "jesse-james", seed: 1, score: 134},
+                    {
+                        name: "Scott Anderson",
+                        id: "scott-anderson",
+                        seed: 12,
+                        score: 134,
+                    },
+                ],
+                [
+                    {name: "Josh Groben", id: "josh-groben", seed: 13, score: 134},
+                    {
+                        name: "Sammy Zettersten",
+                        id: "sammy-zettersten",
+                        seed: 14,
+                        score: 134,
+                    },
+                ],
+                [
+                    {name: "Jake Coutry", id: "jake-coutry", seed: 15, score: 134},
+                    {
+                        name: "Spencer Zettersten",
+                        id: "spencer-zettersten",
+                        seed: 16,
+                        score: 134,
+                    },
+                ],
+            ],
+            [
+                [
+                    {
+                        name: "Erik Zettersten",
+                        id: "erik-zettersten",
+                        seed: 1,
+                        score: 134,
+                    },
+                    {
+                        name: "James Coutry",
+                        id: "james-coutry",
+                        seed: 3,
+                        score: 134,
+                    },
+                ],
+                [
+                    {name: "Anothy Hopkins", id: "anthony-hopkins", seed: 5},
+                    {
+                        name: "Teddy Koufus",
+                        id: "teddy-koufus",
+                        seed: 8,
+                        score: 134,
+                    },
+                ],
+                [
+                    {name: "Ryan Anderson", id: "ryan-anderson", seed: 10},
+                    {
+                        name: "Scott Anderson",
+                        id: "scott-anderson",
+                        seed: 12,
+                        score: 134,
+                    },
+                ],
+                [
+                    {name: "Sammy Zettersten", id: "sammy-zettersten", seed: 14},
+                    {
+                        name: "Jake Coutry",
+                        id: "jake-coutry",
+                        seed: 15,
+                    },
+                ],
+            ],
+
+            [
+                [
+                    {name: "Erik Zettersten", id: "erik-zettersten", seed: 1},
+                    {
+                        name: "Anothy Hopkins",
+                        id: "anthony-hopkins",
+                        seed: 5,
+                    },
+                ],
+                [
+                    {name: "Ryan Anderson", id: "ryan-anderson", seed: 10, score: 1},
+                    {
+                        name: "Sammy Zettersten",
+                        id: "sammy-zettersten",
+                        seed: 14,
+                    },
+                ],
+            ],
+            [
+                [
+                    {name: "Erik Zettersten", id: "erik-zettersten", seed: 1},
+                    {
+                        name: "Ryan Anderson",
+                        id: "ryan-anderson",
+                        seed: 10,
+                    },
+                ],
+            ],
+            [[{name: "Erik Zettersten", id: "erik-zettersten", seed: 1}]],
+        ];
+
+        // initializer
+        $(".my_gracket").gracket({src: win.TestData});
+    })(window, document, jQuery);
+</script>
+</body>
+</html>

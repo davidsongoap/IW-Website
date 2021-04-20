@@ -2,3 +2,6 @@ venv/
 .idea/
 NULL
 dgit.bat
+IW/__pycache__/
+IselWinner/__pycache__/
+register/__pycache__/

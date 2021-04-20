@@ -1,0 +1,195 @@
+h1 {
+    margin: 150px auto 30px auto;
+    text-align: center;
+}
+
+canvas {
+}
+
+.g_gracket {
+    background-color: #211c36;
+    padding: 70px 65px 5px;
+    position: relative;
+}
+
+.g_round {
+    float: left;
+    margin-right: 70px;
+    background-color: #211c36;
+    position: relative;
+}
+
+.g_game {
+    position: relative;
+    /*margin-bottom: 60px;*/
+    margin-bottom: 50px;
+}
+
+.g_gracket h3 {
+    margin: 0;
+    padding: 10px 8px 8px;
+    font-size: 18px;
+    font-weight: normal;
+    color: #fff;
+}
+
+.g_team {
+}
+
+.g_team:last-child {
+}
+
+.g_round:last-child {
+    margin-right: 20px;
+}
+
+.g_winner {
+    background: none;
+    /*border-radius: 11px;*/
+    border-radius: 11px;
+    padding-top: 10px;
+}
+
+.g_current {
+    cursor: pointer;
+    background: #a0b43c !important;
+}
+
+.g_round_label {
+    top: -5px;
+    font-weight: normal;
+    color: #fbfbfb;
+    text-align: center;
+    vertical-align: center;
+    font-size: 25px;
+}
+
+h5:first-of-type {
+    padding-top: 25px;
+}
+
+.team_div {
+    display: flex;
+    margin-bottom: 30px;
+    height: 45px;
+    /*width: 300px;*/
+    width: 220px;
+    border-radius: 11px;
+    background-color: #e84545;
+
+    box-shadow: 0 5px rgba(93, 64, 55, 0.4),
+    0 10px rgba(93, 64, 55, 0.3),
+    0 15px rgba(93, 64, 55, 0.2),
+    0 20px rgba(93, 64, 55, 0.1),
+    0 25px rgba(93, 64, 55, 0.05),
+    -5px 5px 40px rgba(100, 0, 0, 0.4);
+
+}
+
+.team_div h3 {
+    /*font-size: larger;*/
+    color: #fbfbfb;
+    flex: 0 0 80%;
+}
+
+.team_div h3 div {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    padding-left: 10px;
+    font-size: 20px;
+}
+
+.team_div .score_div {
+    color: white;
+    background-color: #763d3d;
+    flex: 1;
+    border-top-right-radius: 11px;
+    border-bottom-right-radius: 11px;
+}
+
+.team_div .score_div .score_text {
+    font-size: 20px;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+}
+
+/*#active{*/
+/*   background-color: red;*/
+/*}*/
+
+
+thead tr th,
+tbody tr td {
+    /*font-weight: normal;*/
+    /*background-color: red;*/
+    color: #fbfbfb;
+}
+
+/*thead tr th:first-child,*/
+/*tbody tr td:first-child {*/
+/*    width: 24px;*/
+/*    !*font-weight: normal;*!*/
+/*}*/
+
+
+tr:nth-child(even) {
+    background: #1C1833
+}
+
+tr:nth-child(odd) {
+    background: #211C39
+}
+
+#t_image img {
+    border: 0 !important;
+    border-color: #130F26;;
+    border-radius: 14px 14px 0 0;
+}
+
+
+.ui.card {
+    box-shadow: none;
+    border-width: 2px;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.ui.table {
+    border: 0 !important;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-color: #130F26;;
+}
+
+
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-20%);
+        opacity: 0%;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 100%;
+
+    }
+}
+
+@keyframes onlyFade {
+    0% {
+        opacity: 0%;
+    }
+    100% {
+        opacity: 100%;
+    }
+}
+
+h5, .g_round {
+    animation: 0.5s ease-out 0s 1 slideInFromLeft;
+
+}
+
+canvas {
+    animation: 1.1s ease-out 0s 1 onlyFade;
+}
+
