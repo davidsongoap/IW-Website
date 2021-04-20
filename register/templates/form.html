@@ -1,3 +1,13 @@
+
+{% extends 'IW/base.html' %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/forms.css' %}">
+{% endblock %}
+
+{% block content %}
 <div id="container">
     <div id="container-esq">
         <div class="wrap">
@@ -8,9 +18,10 @@
                 {{ form|crispy }}
                 <button id="submit-button" type="submit" class="ui button">{% block button-text %}{button text here}{% endblock %}</button>
             {% block footer-info %}
-                {footer info here}
+
+                <p id="footer-info">{footer info here}</p>
             {% endblock %}
-                <p id="footer-info">Don't have an account? Create one <a href="/register">here</a></p>
+
             </form>
         </div>
     </div>
@@ -35,3 +46,4 @@
         </div>
     </div>
 </div>
+{% endblock %}
