@@ -30,19 +30,25 @@
     background-color: var(--form-color2);
 }
 
-/*@media screen and (min-width: 924px) {*/
-/*    #container-dir {*/
-/*        !*display: flex;*!*/
-/*        !*flex-direction: column;*!*/
-/*        width: 50%;*/
-/*        border-radius: 0 25px 25px 0;*/
-/*        float: right;*/
-/*        background-color: var(--form-color2);*/
-/*        display: block;*/
-/*    }*/
-/*}*/
+.wrap {
+    position: relative;
+    top: 45%;
+    left: 50%;
+    margin-right: -50%;
+    /*margin:auto;*/
+    transform: translate(-50%, -50%);
 
-@media screen and (max-width: 924px) {
+}
+
+.wrap form {
+    /*margin: 30%;*/
+    padding-left: 10%;
+    padding-right: 10%;
+
+}
+
+
+@media screen and (max-width: 933px) {
     #container-dir {
         display: none;
     }
@@ -50,12 +56,21 @@
     #container-esq {
         width: 100%;
         flex: 1;
+        padding: 20%;
 
-        border-radius: 25px 25px 25px 25px;
+        border-radius: 25px
     }
 
     #container {
         width: 70%;
+    }
+
+    #footer-info {
+        font-size: 20px;
+    }
+
+    #form-title {
+        font-size: 25px;
     }
 }
 
@@ -99,17 +114,44 @@
     height: auto;
 }
 
+#form-title {
+    margin: 0 0 10%;
+    color: white;
+    font-size: 4vw;
+    text-align: center
+}
+
 #logo {
-    padding-left: 27%;
-    padding-right: 27%;
-    padding-top: 25%;
-    height: 50%;
+    /*display: flex;*/
+    /*padding-left: 27%;*/
+    /*padding-right: 27%;*/
+    /*padding-top: 25%;*/
+    /*height: 50%;*/
+    text-align: center;
 }
 
 #iselgg {
     height: 50%;
-    padding-left: 5vw;
-    padding-right: 5vw;
+    /*padding-left: 5vw;*/
+    /*padding-right: 5vw;*/
+    padding-top: 5%;
+    font-size: 5vw;
+    text-align: center;
+}
+
+#iselgg span {
+    color: white;
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+
+}
+
+#footer-info {
+    font-size: 1vw;
+    color: white;
+    text-align: center;
+    padding-top: 10%
 }
 
 #id_username, #id_password, #id_password1, #id_password2, #id_email, #id_confirmation_code,
@@ -128,6 +170,7 @@
 #id_username ::placeholder {
     color: black;
 }
+
 
 #submit-button {
     background-color: #e84545;

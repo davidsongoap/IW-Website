@@ -7,7 +7,7 @@
     <style>
         body {
             background: #211C36 none;
-         }
+        }
     </style>
 {% endblock %}
 {% block title %}
@@ -77,10 +77,12 @@
                         <div style="text-align: center">
 
                             <button style="margin-bottom: 10px" id="enroll-button"
-                                    class=" ui inverted large white button">Edit</button>
+                                    class=" ui inverted large white button">Edit
+                            </button>
 
                             <button id="enroll-button"
-                                    class=" ui inverted large red button">Enroll</button>
+                                    class=" ui inverted large red button">Enroll
+                            </button>
 
                         </div>
                     </div>
@@ -94,7 +96,7 @@
                     class="my_gracket"
             ></div>
         </div>
-{#    <div style="background-color: red;position: page;  flex: 0 0 100px;">asdasda</div>#}
+        {#    <div style="background-color: red;position: page;  flex: 0 0 100px;">asdasda</div>#}
     </div>
 {% endblock %}
 
@@ -113,195 +115,21 @@
     <script type="text/javascript">
         (function (win, doc, $) {
 
-            // Fake Data
-            win.TestData = [
-                [
-                    [
-                        {
-                            name: "Joe ",
-                            id: "erik-zettersten",
-                            seed: 1,
-                            score: 0,
-                        },
-                        {
-                            name: "Paulo",
-                            id: "andrew-miller",
-                            seed: 2,
-                            score: 1,
-                        },
-                    ],
-                    [
-                        {
-                            name: "James Coutry",
-                            id: "james-coutry",
-                            seed: 3,
-                            score: 134,
-                        },
-                        {
-                            name: "Sam Merrill",
-                            id: "sam-merrill",
-                            seed: 4,
-                            score: 134,
-                        },
-                    ],
-                    [
-                        {
-                            name: "Anothy Hopkins",
-                            id: "anthony-hopkins",
-                            seed: 5,
-                            score: 134,
-                        },
-                        {
-                            name: "Everett Zetters",
-                            id: "everett-zettersten",
-                            seed: 6,
-                            score: 134,
-                        },
-                    ],
-                    [
-                        {
-                            name: "John Scott",
-                            id: "john-scott",
-                            seed: 7,
-                            score: 134,
-                        },
-                        {
-                            name: "Teddy Koufus",
-                            id: "teddy-koufus",
-                            seed: 8,
-                            score: 134,
-                        },
-                    ],
-                    [
-                        {
-                            name: "Arnold Palmer",
-                            id: "arnold-palmer",
-                            seed: 9,
-                            score: 134,
-                        },
-                        {
-                            name: "Ryan Anderson",
-                            id: "ryan-anderson",
-                            seed: 10,
-                            score: 134,
-                        },
-                    ],
-                    [
-                        {name: "Jesse James", id: "jesse-james", seed: 1, score: 134},
-                        {
-                            name: "Scott Anderson",
-                            id: "scott-anderson",
-                            seed: 12,
-                            score: 134,
-                        },
-                    ],
-                    [
-                        {name: "Josh Groben", id: "josh-groben", seed: 13, score: 134},
-                        {
-                            name: "Sammy Zetters",
-                            id: "sammy-zettersten",
-                            seed: 14,
-                            score: 134,
-                        },
-                    ],
-                    [
-                        {name: "Jake Coutry", id: "jake-coutry", seed: 15, score: 134},
-                        {
-                            name: "Spencer Zetters",
-                            id: "spencer-zettersten",
-                            seed: 16,
-                            score: 134,
-                        },
-                    ],
-                ], // fim primeira ronda
-                [
-                    [
-                        {
-                            name: "Erik Zettersten",
-                            id: "erik-zettersten",
-                            seed: 1,
-                            score: 134,
-                        },
-                        {
-                            name: "James Coutry",
-                            id: "james-coutry",
-                            seed: 3,
-                            score: 134,
-                        },
-                    ],
-                    [
-                        {name: "Anothy Hopkins", id: "anthony-hopkins", seed: 5},
-                        {
-                            name: "Teddy Koufus",
-                            id: "teddy-koufus",
-                            seed: 8,
-                            score: 134,
-                        },
-                    ],
-                    [
-                        {name: "Ryan Anderson", id: "ryan-anderson", seed: 10},
-                        {
-                            name: "Scott Anderson",
-                            id: "scott-anderson",
-                            seed: 12,
-                            score: 134,
-                        },
-                    ],
-                    [
-                        {name: "Sammy Zetters", id: "sammy-zettersten", seed: 14},
-                        {
-                            name: "Jake Coutry",
-                            id: "jake-coutry",
-                            seed: 15,
-                        },
-                    ],
-                ], // fim segunda ronda
-                [
-                    [
-                        {name: "Erik Zettersten", id: "erik-zettersten", seed: 1},
-                        {
-                            name: "Anothy Hopkins",
-                            id: "anthony-hopkins",
-                            seed: 5,
-                        },
-                    ],
-                    [
-                        {name: "Ryan Anderson", id: "ryan-anderson", seed: 10, score: 1},
-                        {
-                            name: "Sammy Zetters",
-                            id: "sammy-zettersten",
-                            seed: 14,
-                        },
-                    ],
-                ], // fim terceira ronda
-                [
-                    [
-                        {name: "Erik Zettersten", id: "erik-zettersten", seed: 1},
-                        {
-                            name: "Ryan Anderson",
-                            id: "ryan-anderson",
-                            seed: 10,
-                        },
-                    ],
-                ], // fim quarta ronda
-                [[{name: "Erik Zettersten", id: "erik-zettersten", seed: 1}]], // vencedor
-            ];
-
             {#// Fake Data#}
             {#win.TestData = [#}
             {#    [#}
             {#        [#}
             {#            {#}
-            {#                name: "Erik Zettersten",#}
+            {#                name: "Joe ",#}
             {#                id: "erik-zettersten",#}
             {#                seed: 1,#}
-            {#                score: 160,#}
+            {#                score: 0,#}
             {#            },#}
             {#            {#}
-            {#                name: "Andrew Miller",#}
+            {#                name: "Paulo",#}
             {#                id: "andrew-miller",#}
             {#                seed: 2,#}
-            {#                score: 122,#}
+            {#                score: 1,#}
             {#            },#}
             {#        ],#}
             {#        [#}
@@ -346,6 +174,47 @@
             {#                score: 134,#}
             {#            },#}
             {#        ],#}
+            {#        [#}
+            {#            {#}
+            {#                name: "Arnold Palmer",#}
+            {#                id: "arnold-palmer",#}
+            {#                seed: 9,#}
+            {#                score: 134,#}
+            {#            },#}
+            {#            {#}
+            {#                name: "Ryan Anderson",#}
+            {#                id: "ryan-anderson",#}
+            {#                seed: 10,#}
+            {#                score: 134,#}
+            {#            },#}
+            {#        ],#}
+            {#        [#}
+            {#            {name: "Jesse James", id: "jesse-james", seed: 1, score: 134},#}
+            {#            {#}
+            {#                name: "Scott Anderson",#}
+            {#                id: "scott-anderson",#}
+            {#                seed: 12,#}
+            {#                score: 134,#}
+            {#            },#}
+            {#        ],#}
+            {#        [#}
+            {#            {name: "Josh Groben", id: "josh-groben", seed: 13, score: 134},#}
+            {#            {#}
+            {#                name: "Sammy Zetters",#}
+            {#                id: "sammy-zettersten",#}
+            {#                seed: 14,#}
+            {#                score: 134,#}
+            {#            },#}
+            {#        ],#}
+            {#        [#}
+            {#            {name: "Jake Coutry", id: "jake-coutry", seed: 15, score: 134},#}
+            {#            {#}
+            {#                name: "Spencer Zetters",#}
+            {#                id: "spencer-zettersten",#}
+            {#                seed: 16,#}
+            {#                score: 134,#}
+            {#            },#}
+            {#        ],#}
             {#    ], // fim primeira ronda#}
             {#    [#}
             {#        [#}
@@ -363,16 +232,29 @@
             {#            },#}
             {#        ],#}
             {#        [#}
-            {#            {#}
-            {#                name: "Anothy Hopkins",#}
-            {#                id: "anthony-hopkins",#}
-            {#                seed: 5#}
-            {#            },#}
+            {#            {name: "Anothy Hopkins", id: "anthony-hopkins", seed: 5},#}
             {#            {#}
             {#                name: "Teddy Koufus",#}
             {#                id: "teddy-koufus",#}
             {#                seed: 8,#}
             {#                score: 134,#}
+            {#            },#}
+            {#        ],#}
+            {#        [#}
+            {#            {name: "Ryan Anderson", id: "ryan-anderson", seed: 10},#}
+            {#            {#}
+            {#                name: "Scott Anderson",#}
+            {#                id: "scott-anderson",#}
+            {#                seed: 12,#}
+            {#                score: 134,#}
+            {#            },#}
+            {#        ],#}
+            {#        [#}
+            {#            {name: "Sammy Zetters", id: "sammy-zettersten", seed: 14},#}
+            {#            {#}
+            {#                name: "Jake Coutry",#}
+            {#                id: "jake-coutry",#}
+            {#                seed: 15,#}
             {#            },#}
             {#        ],#}
             {#    ], // fim segunda ronda#}
@@ -385,12 +267,286 @@
             {#                seed: 5,#}
             {#            },#}
             {#        ],#}
+            {#        [#}
+            {#            {name: "Ryan Anderson", id: "ryan-anderson", seed: 10, score: 1},#}
+            {#            {#}
+            {#                name: "Sammy Zetters",#}
+            {#                id: "sammy-zettersten",#}
+            {#                seed: 14,#}
+            {#            },#}
+            {#        ],#}
             {#    ], // fim terceira ronda#}
+            {#    [#}
+            {#        [#}
+            {#            {name: "Erik Zettersten", id: "erik-zettersten", seed: 1},#}
+            {#            {#}
+            {#                name: "Ryan Anderson",#}
+            {#                id: "ryan-anderson",#}
+            {#                seed: 10,#}
+            {#            },#}
+            {#        ],#}
+            {#    ], // fim quarta ronda#}
             {#    [[{name: "Erik Zettersten", id: "erik-zettersten", seed: 1}]], // vencedor#}
             {#];#}
+
+            // Fake Data
+            win.TestData = [
+                [
+                    [
+                        {
+                            name: "Erik Zettersten",
+                            id: "erik-zettersten",
+                            seed: 1,
+                            score: 160,
+                        },
+                        {
+                            name: "Andrew Miller",
+                            id: "andrew-miller",
+                            seed: 2,
+                            score: 122,
+                        },
+                    ],
+                    [
+                        {
+                            name: "James Coutry",
+                            id: "james-coutry",
+                            seed: 3,
+                            score: 134,
+                        },
+                        {
+                            name: "Sam Merrill",
+                            id: "sam-merrill",
+                            seed: 4,
+                            score: 134,
+                        },
+                    ],
+                    [
+                        {
+                            name: "Anothy Hopkins",
+                            id: "anthony-hopkins",
+                            seed: 5,
+                            score: 134,
+                        },
+                        {
+                            name: "Everett Zetters",
+                            id: "everett-zettersten",
+                            seed: 6,
+                            score: 134,
+                        },
+                    ],
+                    [
+                        {
+                            name: "John Scott",
+                            id: "john-scott",
+                            seed: 7,
+                            score: 134,
+                        },
+                        {
+                            name: "Teddy Koufus",
+                            id: "teddy-koufus",
+                            seed: 8,
+                            score: 134,
+                        },
+                    ],
+                ], // fim primeira ronda
+                [
+                    [
+                        {
+                            name: "Erik Zettersten",
+                            id: "erik-zettersten",
+                            seed: 1,
+                            score: 134,
+                        },
+                        {
+                            name: "James Coutry",
+                            id: "james-coutry",
+                            seed: 3,
+                            score: 134,
+                        },
+                    ],
+                    [
+                        {
+                            name: "Anothy Hopkins",
+                            id: "anthony-hopkins",
+                            seed: 5
+                        },
+                        {
+                            name: "Teddy Koufus",
+                            id: "teddy-koufus",
+                            seed: 8,
+                            score: 134,
+                        },
+                    ],
+                ], // fim segunda ronda
+                [
+                    [
+                        {name: "Erik Zettersten", id: "erik-zettersten", seed: 1},
+                        {
+                            name: "Anothy Hopkins",
+                            id: "anthony-hopkins",
+                            seed: 5,
+                        },
+                    ],
+                ], // fim terceira ronda
+                [[{name: "Erik Zettersten", id: "erik-zettersten", seed: 1}]], // vencedor
+            ];
+
+
+            {#// Fake Data#}
+            {#win.TestData = [#}
+            {#    [#}
+            {#        [#}
+            {#            {#}
+            {#                name: "Erik Zettersten",#}
+            {#                id: "erik-zettersten",#}
+            {#                seed: 1,#}
+            {#                score: 160,#}
+            {#            },#}
+            {#            {#}
+            {#                name: "Andrew Miller",#}
+            {#                id: "andrew-miller",#}
+            {#                seed: 2,#}
+            {#                score: 122,#}
+            {#            },#}
+            {#            {#}
+            {#                name: "Andrew Miller",#}
+            {#                id: "andrew-miller",#}
+            {#                seed: 2,#}
+            {#                score: 122,#}
+            {#            },#}
+            {#            {#}
+            {#                name: "Andrew Miller",#}
+            {#                id: "andrew-miller",#}
+            {#                seed: 2,#}
+            {#                score: 122,#}
+            {#            },#}
+            {#            {#}
+            {#                name: "Andrew Miller",#}
+            {#                id: "andrew-miller",#}
+            {#                seed: 2,#}
+            {#                score: 122,#}
+            {#            },#}
+            {#            {#}
+            {#                name: "Andrew Miller",#}
+            {#                id: "andrew-miller",#}
+            {#                seed: 2,#}
+            {#                score: 122,#}
+            {#            },#}
+            {#            {#}
+            {#                name: "Andrew Miller",#}
+            {#                id: "andrew-miller",#}
+            {#                seed: 2,#}
+            {#                score: 122,#}
+            {#            },#}
+            {#            {#}
+            {#                name: "Andrew Miller",#}
+            {#                id: "andrew-miller",#}
+            {#                seed: 2,#}
+            {#                score: 122,#}
+            {#            },#}
+            {#            {#}
+            {#                name: "Andrew Miller",#}
+            {#                id: "andrew-miller",#}
+            {#                seed: 2,#}
+            {#                score: 122,#}
+            {#            },#}
+            {#            {#}
+            {#                name: "Andrew Miller",#}
+            {#                id: "andrew-miller",#}
+            {#                seed: 2,#}
+            {#                score: 122,#}
+            {#            },#}
+            {#            {#}
+            {#                name: "Andrew Miller",#}
+            {#                id: "andrew-miller",#}
+            {#                seed: 2,#}
+            {#                score: 122,#}
+            {#            },#}
+            {#            {#}
+            {#                name: "Andrew Miller",#}
+            {#                id: "andrew-miller",#}
+            {#                seed: 2,#}
+            {#                score: 122,#}
+            {#            },#}
+            {#            {#}
+            {#                name: "Andrew Miller",#}
+            {#                id: "andrew-miller",#}
+            {#                seed: 2,#}
+            {#                score: 122,#}
+            {#            },#}
+            {#            {#}
+            {#                name: "Andrew Miller",#}
+            {#                id: "andrew-miller",#}
+            {#                seed: 2,#}
+            {#                score: 122,#}
+            {#            },#}
+            {#            {#}
+            {#                name: "Andrew Miller",#}
+            {#                id: "andrew-miller",#}
+            {#                seed: 2,#}
+            {#                score: 122,#}
+            {#            },#}
+            {#            {#}
+            {#                name: "Andrew Miller",#}
+            {#                id: "andrew-miller",#}
+            {#                seed: 2,#}
+            {#                score: 122,#}
+            {#            },#}
+            {#            {#}
+            {#                name: "Andrew Miller",#}
+            {#                id: "andrew-miller",#}
+            {#                seed: 2,#}
+            {#                score: 122,#}
+            {#            },#}
+            {#            {#}
+            {#                name: "Andrew Miller",#}
+            {#                id: "andrew-miller",#}
+            {#                seed: 2,#}
+            {#                score: 122,#}
+            {#            },#}
+            {#            {#}
+            {#                name: "Andrew Miller",#}
+            {#                id: "andrew-miller",#}
+            {#                seed: 2,#}
+            {#                score: 122,#}
+            {#            },#}
+            {#            {#}
+            {#                name: "Andrew Miller",#}
+            {#                id: "andrew-miller",#}
+            {#                seed: 2,#}
+            {#                score: 122,#}
+            {#            },#}
+            {#            {#}
+            {#                name: "Andrew Miller",#}
+            {#                id: "andrew-miller",#}
+            {#                seed: 2,#}
+            {#                score: 122,#}
+            {#            },#}
+            {#            {#}
+            {#                name: "Andrew Miller",#}
+            {#                id: "andrew-miller",#}
+            {#                seed: 2,#}
+            {#                score: 122,#}
+            {#            },#}
+            {##}
+            {#        ],#}
+            {#    ],#}
+            {#    [[{name: "Erik Zettersten", id: "erik-zettersten", seed: 1}]], // vencedor#}
+            {##}
+            {#]#}
+            {##}
 
             // initializer
             $(".my_gracket").gracket({src: win.TestData});
         })(window, document, jQuery);
     </script>
+
+    <style>
+        {#Place the winner at the top#}
+        {#.g_round .g_winner {#}
+        {#    margin-top: 0 !important;#}
+        {#    padding-top: 0px;#}
+        {#}#}
+    </style>
+
 {% endblock %}
