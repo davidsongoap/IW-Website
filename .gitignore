@@ -9,3 +9,4 @@ rgit.bat
 __pycache__/
 register/migrations/*
 IW/migrations/*
+.env
