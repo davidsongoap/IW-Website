@@ -14,7 +14,8 @@
     <h1 style="text-align: center;font-size: 45px">Tournaments List</h1>
 
 
-    <div style="justify-content: center" class="ui container fitted special cards">
+{#        <div style="justify-content: center" class="ui container fitted special cards">#}
+            <div style="justify-content: center" class="ui container three doubling special cards">
         {% for i in range %}
             <div id="t-card" class="card">
                 <div id="t-dimmer" class=" dimmable image">
@@ -34,12 +35,12 @@
                     {% elif i == 1 %}
                         <img src="{% static 'images/reaper.jpg' %}" alt="">
                     {% else %}
-                        <img src="{% static 'images/gamer.png' %}" alt="">
+                        <img src="{% static 'images/ceifador-mascote-logotipo-design_142989-234.jpg' %}" alt="">
                     {% endif %}
                 </div>
                 <div id="t-card-content" class="t-card-content content ">
                     <div class="header">
-                       <span>
+                       <span  >
                            {% if i == 0 %}
                                <i class="status-icon-red circle icon"></i>
                            {% elif i == 2 %}
@@ -56,7 +57,7 @@
                 </div>
                 <div class="ui fitted divider"></div>
                 <div id="t-card-content" class="extra content">
-                  <span class="t-card-date">
+                  <span style="margin-top: 28px" class="t-card-date">
                     21 / 3 / 2021
                   </span>
                     <span>
