@@ -10,3 +10,4 @@ __pycache__/
 register/migrations/*
 IW/migrations/*
 .env
+IselWinner/iwdatabase.sql
