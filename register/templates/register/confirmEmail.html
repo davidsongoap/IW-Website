@@ -10,7 +10,8 @@
 
 
 {% block form-description %}
-    <p id="form-description">We sent an email to email@domain.pt</p>
+    <p id="form-description">We sent an email to {{ user.email }}</p>
+    <p id="form-description"><u>You must confirm to access all functionalities</u></p>
 {% endblock %}
 
 {% block button-text %}
@@ -19,4 +20,20 @@
 
 {% block footer-info %}
     <p id="footer-info"> Didn't get the email? <a href="/register">Resend</a></p>
+{% endblock %}
+
+{% block extra %}
+    {#    <a href="/">#}
+    <form action="/tournaments/">
+        <button id="normal-button" type="submit" class="ui inverted button">Continue to Website</button>
+    </form>
+    {% if message != "" %}
+        <div class="ui negative message">
+            <i class="close icon"></i>
+            <div class="header">
+                {{ message }}
+            </div>
+        </div>
+    {% endif %}
+    {#    </a>#}
 {% endblock %}
