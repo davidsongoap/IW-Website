@@ -19,7 +19,7 @@ def confirm(response):
     if response.method == "POST":
         form = ConfirmEmail(response.POST)
         if form.is_valid():
-            pass # ??
+            pass  # ??
         return redirect("IW/tournaments")
     else:
         form = ConfirmEmail()
@@ -38,12 +38,13 @@ def create_tournament(response):
 
     return render(response, "register/createTournament.html", {"form": form})
 
+
 def upload_game(response):
     if response.method == "POST":
         form = UploadGame(response.POST)
         if form.is_valid():
             pass  # ??
-        return redirect("IW/tournaments")
+        return redirect("tournaments")
     else:
         form = UploadGame()
 

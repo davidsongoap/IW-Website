@@ -18,14 +18,14 @@
             <p id="form-title">Create a Tournament</p>
         </div>
         <div id="container-create-tournament-esq">
-            <p style="color: white; font-size: 1.2vw;">Name</p>
-            <p style="color: white; font-size: 1.2vw;">Game Name</p>
-            <p style="color: white; font-size: 1.2vw;">Visibility</p>
-            <p style="color: white; font-size: 1.2vw;">Password</p>
-            <p style="color: white; font-size: 1.2vw;">Max Players</p>
-            <p style="color: white; font-size: 1.2vw;">Start Date</p>
-            <p style="color: white; font-size: 1.2vw;">Image</p>
-            <p style="color: white; font-size: 1.2vw;">Description</p>
+            <p style="color: white; font-size: 1vw; padding-bottom: 0.3vw">Name</p>
+            <p style="color: white; font-size: 1vw; padding-bottom: 0.2vw">Game Name</p>
+            <p style="color: white; font-size: 1vw; padding-bottom: 0.3vw">Visibility</p>
+            <p  id="password" style="color: white; font-size: 1vw; padding-bottom: 0.2vw">Password</p>
+            <p style="color: white; font-size: 1vw; padding-bottom: 0.4vw">Max Players</p>
+            <p style="color: white; font-size: 1vw; padding-bottom: 0.3vw">Start Date</p>
+            <p style="color: white; font-size: 1vw; padding-bottom: 0.5vw">Image</p>
+            <p style="color: white; font-size: 1vw;">Description</p>
         </div>
         <div id="container-create-tournament-dir">
             <form id="form" method="POST" class="ui form">
@@ -37,4 +37,19 @@
             <button id="submit-button" form="form" type="submit" class="ui button" >Create</button>
         </div>
     </div>
+{% endblock %}
+{% block scripts %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.9/jquery.datetimepicker.css" integrity="sha512-bYPO5jmStZ9WI2602V2zaivdAnbAhtfzmxnEGh9RwtlI00I9s8ulGe4oBa5XxiC6tCITJH/QG70jswBhbLkxPw==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.9/jquery.datetimepicker.full.min.js" integrity="sha512-hDFt+089A+EmzZS6n/urree+gmentY36d9flHQ5ChfiRjEJJKFSsl1HqyEOS5qz7jjbMZ0JU4u/x1qe211534g==" crossorigin="anonymous"></script>
+    <script>$('#id_start_date').datetimepicker()</script>
+    <script>$('#id_visibility').change(function(){
+        if(this.value == 'public'){
+            $('#password').css("display","none");
+            $('#div_id_password').css("display","none");
+        }
+        else{
+            $('#password').css("display","block");
+            $('#div_id_password').css("display","block");
+        }
+    })</script>
 {% endblock %}

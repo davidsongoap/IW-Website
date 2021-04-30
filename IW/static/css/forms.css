@@ -64,7 +64,6 @@
 #container-create-tournament-esq {
     width: 25%;
     float: left;
-    padding-top: 7%;
     padding-bottom: 10%;
     padding-left: 15%;
 }
@@ -72,7 +71,7 @@
 #container-create-tournament-dir {
     width: 75%;
     float: right;
-    padding: 7% 15% 10% 7%;
+    padding: 0 15% 10% 7%;
 }
 
 #container-create-top {
@@ -91,7 +90,6 @@
     margin: 0 0 5%;
     color: white;
     font-size: 4vmax;
-
     text-align: center
 }
 
@@ -136,21 +134,12 @@
 
 #id_username, #id_password, #id_password1, #id_password2, #id_email, #id_confirmation_code,
 #id_tournament_name, #id_description, #id_visibility, #id_game, #id_max_players, #id_start_date,
-#id_image, #id_game_name, #id_code_name, #id_game_file, #id_author {
+#id_cover_art, #id_game_name, #id_code_name, #id_game_file, #id_author, #id_game_play {
     font-family: var(--font);
     background-color: var(--winner-input-color);
     color: var(--font-color);
     border-radius: 10px;
 }
-
-#id_description {
-    padding-bottom: 4%;
-}
-
-#id_username ::placeholder {
-    color: black;
-}
-
 
 #submit-button {
     background-color: #e84545;
@@ -160,6 +149,11 @@
     display: block;
     padding-left: 10%;
     padding-right: 10%;
+}
+
+.xdsoft_date div, .xdsoft_label span, .xdsoft_label div{
+    color: black;
+    font-weight: normal;
 }
 
 @media screen and (max-width: 1000px) {
