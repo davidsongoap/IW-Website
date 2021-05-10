@@ -22,6 +22,7 @@ def confirm(response):
     if response.method == "POST":
         form = ConfirmEmail(response.POST)
         if form.is_valid():
+
             code = form.data.get("confirmation_code")
             if user.confirmationcode.code == code:
                 cc_table = user.confirmationcode
@@ -32,6 +33,7 @@ def confirm(response):
                 msg = "The code is incorrect"
 
     form = ConfirmEmail()
+
 
     if not response.user.is_authenticated:
         # redirects if user didn't login
@@ -65,7 +67,7 @@ def upload_game(response):
         form = UploadGame(response.POST)
         if form.is_valid():
             pass  # ??
-        return redirect("IW/tournaments")
+        return redirect("tournaments")
     else:
         form = UploadGame()
 
