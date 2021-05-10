@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.dispatch.dispatcher import receiver
 
+
 ##### Models #####
 
 class ConfirmationCode(models.Model):
@@ -12,6 +13,15 @@ class ConfirmationCode(models.Model):
 
     def __str__(self):
         return 'ConfirmationCode (user={} | confirm_code={})'.format(str(self.user), self.code)
+
+
+class ProfileImage(models.Model):
+    id = models.AutoField(primary_key=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='profile_pic/', null=True, blank=True)
+
+    def __str__(self):
+        return 'ProfileImage (user={} | image={})'.format(str(self.user), self.image)
 
 
 class Tournament(models.Model):
@@ -52,9 +62,9 @@ class Tournament(models.Model):
 
     def __str__(self):
         return 'Tournament(code={} | name={} | admin_id={} | visibility={} | state={})'.format(self.code, self.name,
-                                                                                              self.admin_id,
-                                                                                              self.visibility,
-                                                                                              self.state)
+                                                                                               self.admin_id,
+                                                                                               self.visibility,
+                                                                                               self.state)
 
 
 class Game(models.Model):
@@ -105,8 +115,22 @@ class Match(models.Model):
 
 
 class User_Match(models.Model):
+    id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     match_id = models.ForeignKey(Match, on_delete=models.CASCADE)
     score = models.IntegerField(null=True)
+
     def __str__(self):
         return 'Match (user_id={} | match_id={} | score={})'.format(self.user_id, self.user_id, self.score)
+
+
+class Moves(models.Model):
+    id = models.AutoField(primary_key=True)
+    move = models.TextField(max_length=300)
+
+
+class Match_Moves(models.Model):
+    id = models.AutoField(primary_key=True)
+    match_id = models.ForeignKey(Match, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    move_id = models.ForeignKey(Moves, on_delete=models.CASCADE)
