@@ -1,11 +1,12 @@
 #container {
     border-radius: 25px;
     width: 60%;
-    height: 75%;
+    /*height: 75%;*/
+    top: 10%;
+    bottom: 10%;
     position: absolute;
-    top: 0;
-    bottom: 0;
     left: 0;
+    min-height: 500px;
     right: 0;
     margin: auto;
     box-shadow: var(--shadow1);
@@ -208,6 +209,7 @@
     }
 
     #container {
+        top: 0;
         height: 100%;
         width: 100%;
         margin: 0;
