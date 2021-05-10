@@ -4,7 +4,7 @@ from register.forms import Login
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    path("", views.home, name="home"),  # home page
+    path("", views.tournaments, name="home"),  # home page
     path("confirmEmail/", views.confirm, name="confirm"),  # pagina de confirmaçao de email
     path("createTournament/", views.create, name="create"),  # pagina para criar torneios
     path("tournaments/", views.tournaments, name="tournaments"),  # pagina com todos os torneios
