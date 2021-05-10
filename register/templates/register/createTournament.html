@@ -13,28 +13,15 @@
 {% block content %}
     {% include "IW/navbar.html" %}
     <div id="container-create-tournament">
-        <!-- create tournament, campos para name, game(dropdown), pass, visibility, max_players, date, description, imagem, href tournaments -->
         <div id="container-create-top">
             <p id="form-title">Create a Tournament</p>
-        </div>
-        <div id="container-create-tournament-esq">
-            <p style="color: white; font-size: 1vw; padding-bottom: 0.3vw">Name</p>
-            <p style="color: white; font-size: 1vw; padding-bottom: 0.2vw">Game Name</p>
-            <p style="color: white; font-size: 1vw; padding-bottom: 0.3vw">Visibility</p>
-            <p  id="password" style="color: white; font-size: 1vw; padding-bottom: 0.2vw">Password</p>
-            <p style="color: white; font-size: 1vw; padding-bottom: 0.4vw">Max Players</p>
-            <p style="color: white; font-size: 1vw; padding-bottom: 0.3vw">Start Date</p>
-            <p style="color: white; font-size: 1vw; padding-bottom: 0.5vw">Image</p>
-            <p style="color: white; font-size: 1vw;">Description</p>
         </div>
         <div id="container-create-tournament-dir">
             <form id="form" method="POST" class="ui form">
                 {% csrf_token %}
                 {{ form|crispy }}
             </form>
-        </div>
-        <div id="container-create-bottom">
-            <button id="submit-button" form="form" type="submit" class="ui button" >Create</button>
+            <button id="submit-button" form="form" type="submit" class="ui button">Create</button>
         </div>
     </div>
 {% endblock %}
@@ -52,4 +39,18 @@
             $('#div_id_password').css("display","block");
         }
     })</script>
+
+    <script>
+        var campos = ['Name', 'Game Name', 'Visibility', 'Password', "Max Players", "Start Date", "Image", "Description"];
+        var ids = ['#div_id_tournament_name', '#div_id_game', '#div_id_visibility', '#div_id_password', '#div_id_max_players', '#div_id_start_date', '#div_id_cover_art', '#div_id_description'];
+
+        for (i = 0; i < campos.length; i++) {
+            let p = document.createElement("p");
+            p.setAttribute("id", "campos")
+            let text = document.createTextNode(campos[i]);
+            p.appendChild(text);
+            let element = $(ids[i]);
+            element.prepend(p);
+        }
+    </script>
 {% endblock %}
