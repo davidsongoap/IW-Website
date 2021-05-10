@@ -18,20 +18,28 @@
         <div id="container-create-top">
             <p id="form-title">Upload a Game</p>
         </div>
-        <div id="container-create-tournament-esq">
-            <p style="color: white; font-size: 1.2vw;">Game Name</p>
-            <p style="color: white; font-size: 1.2vw;">Code Name</p>
-            <p style="color: white; font-size: 1.2vw;">Game File</p>
-            <p style="color: white; font-size: 1.2vw;">Author</p>
-        </div>
         <div id="container-create-tournament-dir">
             <form id="form" method="POST" class="ui form">
                 {% csrf_token %}
                 {{ form|crispy }}
             </form>
-        </div>
-        <div id="container-create-bottom">
             <button id="submit-button" form="form" type="submit" class="ui button" >Upload</button>
         </div>
     </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        var campos = ['Game Name', 'Game File', 'Game Play', 'Author'];
+        var ids = ['#div_id_game_name', '#div_id_game_file', '#div_id_game_play', '#div_id_author'];
+
+        for (i = 0; i < campos.length; i++) {
+            let p = document.createElement("p");
+            p.setAttribute("id", "campos")
+            let text = document.createTextNode(campos[i]);
+            p.appendChild(text);
+            let element = $(ids[i]);
+            element.prepend(p);
+        }
+    </script>
 {% endblock %}
