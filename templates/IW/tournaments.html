@@ -19,7 +19,7 @@
         {% for i in range %}
             <div id="t-card" class="card">
                 <div id="t-dimmer" class=" dimmable image">
-                    <div class="ui dimmer">
+                    <div id="dimmer" class="ui dimmer">
                         <div class="content">
                             <div class="center">
                                 <div id="results-button" onclick="window.location='/tournament/AwesomeName_{{ i }}'"
@@ -29,13 +29,13 @@
                         </div>
                     </div>
                     {% if i == 0 %}
-                        <img src="{% static 'images/skulls.jpg' %}" alt="">
+                        <img src="{% static 'images/default_image.png' %}" alt="">
                     {% elif i == 2 %}
-                        <img src="{% static 'images/optimized_large_thumb_stage.jpg' %}" alt="">
+                        <img src="{% static 'images/default_image.png' %}" alt="">
                     {% elif i == 1 %}
-                        <img src="{% static 'images/reaper.jpg' %}" alt="">
+                        <img src="{% static 'images/default_image.png' %}" alt="">
                     {% else %}
-                        <img src="{% static 'images/ceifador-mascote-logotipo-design_142989-234.jpg' %}" alt="">
+                        <img src="{% static 'images/default_image.png' %}" alt="">
                     {% endif %}
                 </div>
                 <div id="t-card-content" class="t-card-content content ">
