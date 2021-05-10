@@ -72,7 +72,7 @@ class Login(AuthenticationForm):
 
 
 class ConfirmEmail(forms.Form):
-    confirmation_code = forms.CharField(max_length=10)
+    confirmation_code = forms.CharField(max_length=15)
 
     class Meta:
         model = User

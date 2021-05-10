@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 
 import json
 import os
@@ -22,12 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-vufhu+h!w8@k6uxryvh48f1exppveu)12*gpncr=ftzyvs=(yl'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -84,11 +85,13 @@ WSGI_APPLICATION = 'IselWinner.wsgi.application'
 DATABASES = {
     'default': {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "iwdatabase",
-        "USER": "root",
-        "PASSWORD": "root",
-        "HOST": "localhost",
-        "PORT": "33066"
+
+        "NAME": config('DB_NAME'),
+        "USER": config('DB_USER'),
+        "PASSWORD": config('DB_PASSWORD'),
+        "HOST": config('DB_HOST'),
+        "PORT": config('DB_PORT')
+
     }
 }
 
@@ -134,7 +137,9 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CRISPY_TEMPLATE_PACK = "semantic-ui"
-LOGIN_REDIRECT_URL = "/"
+
+LOGIN_REDIRECT_URL = "/confirmEmail"
+
 LOGOUT_REDIRECT_URL = "/"
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'

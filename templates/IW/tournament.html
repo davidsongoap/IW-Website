@@ -76,13 +76,15 @@
                         </table>
                         <div style="text-align: center">
 
-                            <button style="margin-bottom: 10px" id="enroll-button"
-                                    class=" ui inverted large white button">Edit
-                            </button>
+                            {% if user.confirmationcode.validated %}
+                                <button style="margin-bottom: 10px" id="enroll-button"
+                                        class=" ui inverted large white button">Edit
+                                </button>
 
-                            <button id="enroll-button"
-                                    class=" ui inverted large red button">Enroll
-                            </button>
+                                <button id="enroll-button"
+                                        class=" ui inverted large red button">Enroll
+                                </button>
+                            {% endif %}
 
                         </div>
                     </div>
@@ -528,13 +530,12 @@
             {#                seed: 2,#}
             {#                score: 122,#}
             {#            },#}
-            {##}
             {#        ],#}
             {#    ],#}
             {#    [[{name: "Erik Zettersten", id: "erik-zettersten", seed: 1}]], // vencedor#}
             {##}
             {#]#}
-            {##}
+
 
             // initializer
             $(".my_gracket").gracket({src: win.TestData});
@@ -545,7 +546,8 @@
         {#Place the winner at the top#}
         {#.g_round .g_winner {#}
         {#    margin-top: 0 !important;#}
-        {#    padding-top: 0px;#}
+        {#    padding-top: 0;#}
+        {##}
         {#}#}
     </style>
 

@@ -14,7 +14,8 @@
     <h1 style="text-align: center;font-size: 45px">Tournaments List</h1>
 
 
-    <div class="ui container fitted special cards">
+    <div style="justify-content: center" class="ui container fitted link special  cards">
+        {#            <div style="justify-content: center" class="ui container three doubling special cards">#}
         {% for i in range %}
             <div id="t-card" class="card">
                 <div id="t-dimmer" class=" dimmable image">
@@ -34,7 +35,7 @@
                     {% elif i == 1 %}
                         <img src="{% static 'images/reaper.jpg' %}" alt="">
                     {% else %}
-                        <img src="{% static 'images/gamer.png' %}" alt="">
+                        <img src="{% static 'images/ceifador-mascote-logotipo-design_142989-234.jpg' %}" alt="">
                     {% endif %}
                 </div>
                 <div id="t-card-content" class="t-card-content content ">
@@ -56,10 +57,11 @@
                 </div>
                 <div class="ui fitted divider"></div>
                 <div id="t-card-content" class="extra content">
-                  <span class="t-card-date">
+                  <span style="margin-top: 28px" class="t-card-date">
                     21 / 3 / 2021
                   </span>
                     <span>
+                    {% if user.confirmationcode.validated %}
                         {% if i == 0 %}
                             <button id="enroll-button"
                                     class=" ui right floated inverted red button">Enroll</button>
@@ -73,6 +75,7 @@
                             <button id="enroll-button"
                                     class="ui right floated inverted secondary disabled button">Enroll</button>
                         {% endif %}
+                    {% endif %}
       </span>
                 </div>
             </div>
@@ -84,16 +87,4 @@
 
 {% block scripts %}
 
-    <script>
-
-        $(document).ready(function () {
-            $('.special.cards .image').dimmer({
-                on: 'hover',
-                duration: {
-                    show: 400,
-                    hide: 400
-                }
-            });
-        });
-    </script>
 {% endblock %}

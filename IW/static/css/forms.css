@@ -128,7 +128,15 @@
     background-color: #e84545;
     color: white;
     border-radius: 25px;
-    margin: 10% auto;
+    margin: 8% auto 5% auto;
+    display: block;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+#normal-button {
+    border-radius: 25px;
+    margin: 0 auto 0 auto;
     display: block;
     padding-left: 10%;
     padding-right: 10%;
@@ -179,21 +187,26 @@
         font-size: 2vw;
     }
 }
+
 @media screen and (max-width: 550px) {
 
-    body{
+    body {
 
         background-color: #100d20;
         background-image: linear-gradient(160deg, #100000 0%, #211c36 100%);
     }
+
     #container, #container-create-tournament{
+
         height: 100%;
         width: 100%;
         margin: 0;
         border-radius: 0;
     }
+
     #container-esq, #container-create-tournament {
         border-radius:0
+
     }
 
     #container-create-top {

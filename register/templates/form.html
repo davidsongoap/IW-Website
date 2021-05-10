@@ -19,9 +19,11 @@
                     {{ form|crispy }}
                     <button id="submit-button" type="submit" class="ui button">{% block button-text %}{button text
                         here}{% endblock %}</button>
-                    {% block footer-info %}
-                    {% endblock %}
                 </form>
+                {% block extra %}
+                {% endblock %}
+                {% block footer-info %}
+                {% endblock %}
             </div>
         </div>
         <div id="container-dir">
