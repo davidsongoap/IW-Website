@@ -8,4 +8,9 @@ $(document).ready(function () {
             hide: 400
         }
     });
+
+    $('.button').click(function () {
+        // this.addClass('loading')
+         $(this).addClass("loading");
+    });
 });
