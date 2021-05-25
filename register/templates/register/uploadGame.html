@@ -19,11 +19,11 @@
             <p id="form-title">Upload a Game</p>
         </div>
         <div id="container-create-tournament-dir">
-            <form id="form" method="POST" class="ui form">
+            <form enctype="multipart/form-data" id="form" method="POST" class="ui form" action="">
                 {% csrf_token %}
                 {{ form|crispy }}
             </form>
-            <button id="submit-button" form="form" type="submit" class="ui button" >Upload</button>
+            <button id="submit-button" form="form" type="submit" class="ui button">Upload</button>
         </div>
     </div>
 {% endblock %}
