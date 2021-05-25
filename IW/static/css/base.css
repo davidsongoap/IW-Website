@@ -77,6 +77,9 @@ h1, h2, h3, h4, h5, h6, div {
     padding-top: 40px;
     margin-top: 40px;
 }
+.t-card-owner {
+    font-size: 20px;
+}
 
 #enroll-button {
     border-radius: 7px 7px 7px 7px;
@@ -123,4 +126,45 @@ h1, h2, h3, h4, h5, h6, div {
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--scrollbar-hover)
+
+}
+
+@keyframes slideInFromBottom {
+    0% {
+        transform: translateY(10%);
+        opacity: 0%;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 100%;
+
+    }
+}
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-20%);
+        opacity: 0%;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 100%;
+
+    }
+}
+
+@keyframes onlyFade {
+    0% {
+        opacity: 0%;
+    }
+    100% {
+        opacity: 100%;
+    }
+}
+
+.cards{
+    animation: 0.2s ease-out 0s 1 slideInFromBottom;
+}
+
+#t-card {
+    animation: 0.5s ease-out 0s 1 onlyFade;
 }

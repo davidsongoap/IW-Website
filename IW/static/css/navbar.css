@@ -16,6 +16,18 @@ body{
     color: #E84545
 }
 
+#navbar #site-name-span{
+    margin-left: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 10px;
+}
+
+#navbar #site-name-span:hover{
+    background-color: var(--light-bg);
+}
+
+
 #navbar {
     z-index: 6;
     padding: 4;
@@ -66,3 +78,8 @@ body{
 #navbar .right .input button svg {
 }
 
+@media screen and (max-width: 550px) {
+#site-name-span{
+    display: none;
+}
+}
