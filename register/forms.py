@@ -2,10 +2,11 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django import forms
 from django.contrib.auth.models import User
+from IW.models import *
 
 VISIBILITY_CHOICES = (
-    ('private', 'Private'),
-    ('public', 'Public'),
+    ('PRV', 'Private'),
+    ('PUB', 'Public'),
 )
 
 MAX_PLAYERS_CHOICES = (
@@ -75,7 +76,7 @@ class ConfirmEmail(forms.Form):
     confirmation_code = forms.CharField(max_length=15)
 
     class Meta:
-        model = User
+        model = ConfirmationCode
         fields = ['confirmation_code']
 
     def __init__(self, *args, **kwargs):
@@ -84,19 +85,37 @@ class ConfirmEmail(forms.Form):
         self.fields['confirmation_code'].label = False
 
 
+def get_available_games():
+    games = Game.objects.all()
+    game_list = []
+    for game in games:
+        game_list.append((str(game.id)+game.n_players, game.name))
+    return game_list
+
+
 class CreateTournament(forms.Form):
     tournament_name = forms.CharField(max_length=25)
-    game = forms.CharField(widget=forms.Select(choices=GAME_NAME_CHOICES))
+    game = forms.CharField(widget=forms.Select(choices=get_available_games()))
     visibility = forms.CharField(widget=forms.Select(choices=VISIBILITY_CHOICES))
-    password = forms.CharField(max_length=15)
+    password = forms.CharField(max_length=15, required=False)
     max_players = forms.CharField(widget=forms.Select(choices=MAX_PLAYERS_CHOICES))
-    start_date = forms.DateTimeField()
-    cover_art = forms.FileField(label='Select game file', widget=forms.FileInput(attrs={'accept': '.png,.jpg'}))
-    description = forms.CharField(widget=forms.Textarea, max_length=50)
+    start_date = forms.DateTimeField(input_formats=['%Y-%m-%d, %H:%M:%S',  # '2006-10-25 14:30:59'
+                                                    '%Y-%m-%d %H:%M',  # '2006-10-25 14:30'
+                                                    '%Y-%m-%d',  # '2006-10-25'
+                                                    '%m/%d/%Y %H:%M:%S',  # '10/25/2006 14:30:59'
+                                                    '%m/%d/%Y %H:%M',  # '10/25/2006 14:30'
+                                                    '%m/%d/%Y',  # '10/25/2006'
+                                                    '%m/%d/%y %H:%M:%S',  # '10/25/06 14:30:59'
+                                                    '%m/%d/%y %H:%M',  # '10/25/06 14:30'
+                                                    '%m/%d/%y'])
+    cover_art = forms.FileField(label='Select game file', widget=forms.FileInput(attrs={'accept': '.png,.jpg'}),
+                                required=False)
+    description = forms.CharField(widget=forms.Textarea(attrs={"rows": 5, "cols": 20}), max_length=50, required=False)
 
     class Meta:
-        model = User
-        fields = ['tournament_name', 'game', 'visibility', 'password', 'max_players', 'start_date', 'cover_art', 'description']
+        model = Tournament
+        fields = ['tournament_name', 'game', 'visibility', 'password', 'max_players', 'start_date', 'cover_art',
+                  'description']
 
     def __init__(self, *args, **kwargs):
         super(CreateTournament, self).__init__(*args, **kwargs)
@@ -110,18 +129,20 @@ class CreateTournament(forms.Form):
         self.fields['max_players'].label = False
         self.fields['game'].label = False
         self.fields['start_date'].label = False
-        self.fields['start_date'].widget = forms.TextInput(attrs={'placeholder': 'Choose time and day for the tournament to start*'})
+        self.fields['start_date'].widget = forms.TextInput(attrs={'placeholder': 'Choose the time and day for the '
+                                                                                 'tournament to start*'})
         self.fields['cover_art'].label = False
 
 
 class UploadGame(forms.Form):
     game_name = forms.CharField(max_length=25)
-    game_file = forms.FileField(label='Select game file', widget=forms.FileInput(attrs={'accept': '.jar,.py,.exe,.zip'}))
+    game_file = forms.FileField(label='Select game file',
+                                widget=forms.FileInput(attrs={'accept': '.jar,.py,.exe,.zip'}))
     game_play = forms.CharField(widget=forms.Select(choices=GAME_PLAY_CHOICES))
     author = forms.CharField(max_length=25)
 
     class Meta:
-        model = User
+        model = Game
         fields = ['game_name', 'code_name', 'game_file', 'author']
 
     def __init__(self, *args, **kwargs):
