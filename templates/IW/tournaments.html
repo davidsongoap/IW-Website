@@ -11,29 +11,27 @@
 {% endblock %}
 
 {% block content %}
-    <h1 style="text-align: center;font-size: 45px">Tournaments List</h1>
-
+    <h1 style=" margin-top: 2%;margin-bottom: 3%;text-align: center;font-size: 45px">Tournaments List</h1>
 
     <div style="justify-content: center" class="ui container fitted link special  cards">
         {#            <div style="justify-content: center" class="ui container three doubling special cards">#}
-        {% for i in range %}
+        {% if not ts %}
+            <div style="margin-top: 10%">No tournaments yet. Try again later</div>
+        {% endif %}
+        {% for t in ts %}
             <div id="t-card" class="card">
                 <div id="t-dimmer" class=" dimmable image">
                     <div id="dimmer" class="ui dimmer">
                         <div class="content">
                             <div class="center">
-                                <div id="results-button" onclick="window.location='/tournament/AwesomeName_{{ i }}'"
+                                <div id="results-button" onclick="window.location='/tournament/{{ t.code }}'"
                                      class="ui inverted button">See Results
                                 </div>
                             </div>
                         </div>
                     </div>
-                    {% if i == 0 %}
-                        <img src="{% static 'images/default_image.png' %}" alt="">
-                    {% elif i == 2 %}
-                        <img src="{% static 'images/default_image.png' %}" alt="">
-                    {% elif i == 1 %}
-                        <img src="{% static 'images/default_image.png' %}" alt="">
+                    {% if t.cover_art != "" %}
+                        <img src="{% get_media_prefix %}{{ t.cover_art }}" alt="">
                     {% else %}
                         <img src="{% static 'images/default_image.png' %}" alt="">
                     {% endif %}
@@ -41,41 +39,29 @@
                 <div id="t-card-content" class="t-card-content content ">
                     <div class="header">
                        <span>
-                           {% if i == 0 %}
+                           {#TODO Arranjar as cores#}
+                           {% if t.state == 0 %}
                                <i class="status-icon-red circle icon"></i>
-                           {% elif i == 2 %}
+                           {% elif t.state == 'ST' %}
                                <i class="status-icon-green circle icon"></i>
-                           {% elif i == 1 %}
+                           {% elif t.state == 'OP' %}
                                <i class="status-icon-yellow circle icon"></i>
                            {% else %}
 
                                <i class="status-icon-grey circle icon"></i>
                            {% endif %}
                        </span>
-                        <span>ISEL CHAMPIONSHIP SERIES</span>
+                        <span>{{ t.name }}</span>
                     </div>
                 </div>
                 <div class="ui fitted divider"></div>
                 <div id="t-card-content" class="extra content">
                   <span style="margin-top: 28px" class="t-card-date">
-                    21 / 3 / 2021
+                      {{ t.start_date.date }}
                   </span>
-                    <span>
-                    {% if user.confirmationcode.validated %}
-                        {% if i == 0 %}
-                            <button id="enroll-button"
-                                    class=" ui right floated inverted red button">Enroll</button>
-                        {% elif i == 1 %}
-                            <button id="enroll-button"
-                                    class=" loading ui right floated inverted red button">Enroll</button>
-                        {% elif i == 2 %}
-                            <button id="enroll-button"
-                                    class="disabled  ui right floated inverted red button">Already Enrolled</button>
-                        {% else %}
-                            <button id="enroll-button"
-                                    class="ui right floated inverted secondary disabled button">Enroll</button>
-                        {% endif %}
-                    {% endif %}
+                    <span style="float: right" class="t-card-owner">
+                        <i class="icon universal access"></i>
+                         {{ t.admin_id }}
       </span>
                 </div>
             </div>

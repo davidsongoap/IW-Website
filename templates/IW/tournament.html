@@ -19,87 +19,154 @@
 {% endblock %}
 
 {% block content %}
-    {#    <h1>Tournament Page</h1>#}
-    <div style=";display: flex;overflow: auto; height: calc(100vh - 40px);">
-        <div style="
-                width:250px; /* or whatever width you want. */
-                float:left;
-                height: 100%;
-                min-height: 700px;
-                background:#130F26;
-                padding: 10px;
-                background: linear-gradient(0deg, rgba(33,28,54,1) 0%, rgba(19,15,38,1) 15%);
-                ">
-            <div id="mycard" class="ui card">
-                <div id="t_image" style="" class="image">
-                    <img src="{% static 'images/default_image.png' %}" alt="">
-                </div>
-                <div class="content" style="padding: 0; border-color:#130F26">
-                    <div class="description">
-                        <table class="ui celled unstackable very compact table">
-                            <tbody>
-                            <tr>
-                                <td><i class=" ui white qrcode icon"></i></td>
-                                <td>YSDI4NV</td>
-                            </tr>
-                            <tr>
-                                <td><i class=" ui white globe icon"></i></td>
-                                <td>Public</td>
-                            </tr>
-                            <tr>
-                                <td><i class=" ui white university icon"></i></td>
-                                <td>Instituto Superior de Engenharia de Lisboa</td>
-                            </tr>
-                            <tr>
-                                <td><i class=" ui white calendar alternate outline icon"></i></td>
-                                <td>23 / 3 / 2021</td>
-                            </tr>
-                            <tr>
-                                <td><i class=" ui white user icon"></i></td>
-                                <td>a_teofilo</td>
-                            </tr>
-                            <tr>
-                                <td><i class=" ui white gamepad icon"></i></td>
-                                <td>Super Connect 4</td>
-                            </tr>
-                            <tr>
-                                <td><i class=" ui white users icon"></i></td>
-                                <td>9</td>
-                            </tr>
-                            <tr>
-                                <td><i class=" ui white align justify icon"></i></td>
-                                <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua.
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <div style="text-align: center">
+    {% if error %}
+        <div id="error_message">{{ error_message }} <br><br>
+            <button onclick="window.location='/'" class="ui inverted button">
+                <i class="left arrow icon"></i>
+                Back to Tournaments List
+            </button>
 
-                            {% if user.confirmationcode.validated %}
-                                <button style="margin-bottom: 10px" id="enroll-button"
-                                        class=" ui inverted large white button">Edit
-                                </button>
+        </div>
+    {% else %}
+        <div style=";display: flex;overflow: auto; height: calc(100vh - 40px);">
+            <div id="sidebar">
+                <div id="mycard" class="ui card">
+                    <div id="t_image" style="" class="image">
+                        {% if t.cover_art != "" %}
+                            <img src="{% get_media_prefix %}{{ t.cover_art }}" alt="">
+                        {% else %}
+                            <img src="{% static 'images/default_image.png' %}" alt="">
+                        {% endif %}
+                    </div>
+                    <div class="content" style="padding: 0; border-color:#130F26">
+                        <div class="description">
+                            <table class="ui celled unstackable very compact table">
+                                <tbody>
+                                <tr>
+                                    <td><i class=" ui white qrcode icon"></i></td>
+                                    <td>{{ t.code }}</td>
+                                </tr>
+                                <tr>
+                                    <td><i class=" ui white globe icon"></i></td>
+                                    <td>{{ t.visibility }}</td>
+                                </tr>
+                                <tr>
+                                    <td><i class=" ui white calendar alternate outline icon"></i></td>
+                                    <td>{{ t.start_date }}</td>
+                                </tr>
+                                <tr>
+                                    <td><i class=" ui white user icon"></i></td>
+                                    <td>{{ owner }}</td>
+                                </tr>
+                                <tr>
+                                    <td><i class=" ui white gamepad icon"></i></td>
+                                    <td>{{ game.name }}</td>
+                                </tr>
+                                <tr>
+                                    <td><i class=" ui white users icon"></i></td>
+                                    <td>{{ player_count }} / {{ max_players }}</td>
+                                </tr>
+                                <tr>
+                                    <td><i class=" ui white align justify icon"></i></td>
+                                    <td>
+                                        {{ t.description| default_if_none:"" }}
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div style="text-align: center">
+                                {% if state == "EN" %}
+                                    <button id="menu-button"
+                                            class=" ui inverted large disabled gray  button">Closed
+                                    </button>
+                                {% elif state == "ST" %}
+                                    <button id="menu-button"
+                                            class=" ui inverted large disabled gray  button">In Progress
+                                    </button>
+                                {% endif %}
 
-                                <button id="enroll-button"
-                                        class=" ui inverted large red button">Enroll
-                                </button>
-                            {% endif %}
+                                {% if user.confirmationcode.validated  and state != "EN" and state != "ST" %}
+                                    {% if state == "OP" %}
+                                        <form method="POST" action="">
+                                            {% csrf_token %}
+                                            {% if not already_enrolled %}
+                                                <form method="POST" action="">
+                                                    {% csrf_token %}
+                                                    <button id="menu-button"
+                                                            class=" ui inverted large red button"> Enroll
+                                                    </button>
+                                                    <input type="hidden" id="current-state" name="current-state"
+                                                           value="Enroll">
+                                                </form>
+                                            {% else %}
+                                                <form method="POST" action="">
+                                                    {% csrf_token %}
+                                                    <button id="menu-button"
+                                                            class=" ui inverted large red button"> Cancel Enroll
+                                                    </button>
+                                                    <input type="hidden" id="current-state" name="current-state"
+                                                           value="CancelEnroll">
+                                                </form>
+                                            {% endif %}
 
+                                        </form>
+                                    {% elif state == "CL" %}
+                                        <button id="menu-button"
+                                                class=" ui inverted large disabled gray  button">Waiting to Start
+                                        </button>
+                                    {% endif %}
+                                    {% if user.id == owner.id %}
+                                        <form method="POST" action="">
+                                            {% csrf_token %}
+                                            <button type="submit" id="menu-button"
+                                                    class=" ui inverted large white button">Edit
+                                            </button>
+                                            <input type="hidden" id="current-state" name="current-state" value="Edit">
+                                        </form>
+                                        {% if state == 'PL' %}
+                                            <form method="POST" action="">
+                                                {% csrf_token %}
+                                                <button id="menu-button"
+                                                        class=" ui inverted large green button">Open Enrollments
+                                                </button>
+                                                <input type="hidden" id="current-state" name="current-state" value="OP">
+                                            </form>
+                                        {% elif state == 'OP' %}
+                                            <button id="menu-button"
+                                                    class=" ui inverted large disabled gray  button">Waiting For Players
+                                            </button>
+                                        {% endif %}
+                                        {% if state == 'CL' or t_type == 'SOLO' and player_count >= 2 %}
+                                            <form method="POST" action="">
+                                                {% csrf_token %}
+                                                <button id="menu-button"
+                                                        class=" ui inverted large  green  button">Start
+                                                </button>
+                                                <input type="hidden" id="current-state" name="current-state"
+                                                       value="ST">
+                                            </form>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endif %}
+
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div style=" flex: 0 0 100px">
-            <div
-                    style="width: max-content; padding-right: 0; float: left; overflow-x:visible "
-                    class="my_gracket"
-            ></div>
+            {% if state == 'ST' %}
+                <div style=" flex: 0 0 100px">
+                    <div
+                            style="width: max-content; padding-right: 0; float: left; overflow-x:visible "
+                            class="my_gracket"
+                    ></div>
+                </div>
+            {% elif state != 'ST' %}
+                <div id="error_message2">This tournament hasn't started yet.</div>
+            {% endif %}
         </div>
-        {#    <div style="background-color: red;position: page;  flex: 0 0 100px;">asdasda</div>#}
-    </div>
+    {% endif %}
 {% endblock %}
 
 {% block scripts %}
@@ -114,441 +181,60 @@
 
     <script type="text/javascript" src="{% static '/js/jquery.gracket.js' %}"></script>
 
-    <script type="text/javascript">
-        (function (win, doc, $) {
+    {% if state == 'ST' %}
+        <script type="text/javascript">
+            (function (win, doc, $) {
+                win.Data = [
+                    {% for round in matches %}
+                        [
+                            {% for match in round %}
+                                [
+                                    {% for participant in match %}
+                                        {
+                                            name: "{{ participant.0 }}",
+                                            score: "{{ participant.1 }}",
+                                            seed: 1
+                                        },
+                                    {% endfor %}
+                                ],
 
-            {#// Fake Data#}
-            {#win.TestData = [#}
-            {#    [#}
-            {#        [#}
-            {#            {#}
-            {#                name: "Joe ",#}
-            {#                id: "erik-zettersten",#}
-            {#                seed: 1,#}
-            {#                score: 0,#}
-            {#            },#}
-            {#            {#}
-            {#                name: "Paulo",#}
-            {#                id: "andrew-miller",#}
-            {#                seed: 2,#}
-            {#                score: 1,#}
-            {#            },#}
-            {#        ],#}
-            {#        [#}
-            {#            {#}
-            {#                name: "James Coutry",#}
-            {#                id: "james-coutry",#}
-            {#                seed: 3,#}
-            {#                score: 134,#}
-            {#            },#}
-            {#            {#}
-            {#                name: "Sam Merrill",#}
-            {#                id: "sam-merrill",#}
-            {#                seed: 4,#}
-            {#                score: 134,#}
-            {#            },#}
-            {#        ],#}
-            {#        [#}
-            {#            {#}
-            {#                name: "Anothy Hopkins",#}
-            {#                id: "anthony-hopkins",#}
-            {#                seed: 5,#}
-            {#                score: 134,#}
-            {#            },#}
-            {#            {#}
-            {#                name: "Everett Zetters",#}
-            {#                id: "everett-zettersten",#}
-            {#                seed: 6,#}
-            {#                score: 134,#}
-            {#            },#}
-            {#        ],#}
-            {#        [#}
-            {#            {#}
-            {#                name: "John Scott",#}
-            {#                id: "john-scott",#}
-            {#                seed: 7,#}
-            {#                score: 134,#}
-            {#            },#}
-            {#            {#}
-            {#                name: "Teddy Koufus",#}
-            {#                id: "teddy-koufus",#}
-            {#                seed: 8,#}
-            {#                score: 134,#}
-            {#            },#}
-            {#        ],#}
-            {#        [#}
-            {#            {#}
-            {#                name: "Arnold Palmer",#}
-            {#                id: "arnold-palmer",#}
-            {#                seed: 9,#}
-            {#                score: 134,#}
-            {#            },#}
-            {#            {#}
-            {#                name: "Ryan Anderson",#}
-            {#                id: "ryan-anderson",#}
-            {#                seed: 10,#}
-            {#                score: 134,#}
-            {#            },#}
-            {#        ],#}
-            {#        [#}
-            {#            {name: "Jesse James", id: "jesse-james", seed: 1, score: 134},#}
-            {#            {#}
-            {#                name: "Scott Anderson",#}
-            {#                id: "scott-anderson",#}
-            {#                seed: 12,#}
-            {#                score: 134,#}
-            {#            },#}
-            {#        ],#}
-            {#        [#}
-            {#            {name: "Josh Groben", id: "josh-groben", seed: 13, score: 134},#}
-            {#            {#}
-            {#                name: "Sammy Zetters",#}
-            {#                id: "sammy-zettersten",#}
-            {#                seed: 14,#}
-            {#                score: 134,#}
-            {#            },#}
-            {#        ],#}
-            {#        [#}
-            {#            {name: "Jake Coutry", id: "jake-coutry", seed: 15, score: 134},#}
-            {#            {#}
-            {#                name: "Spencer Zetters",#}
-            {#                id: "spencer-zettersten",#}
-            {#                seed: 16,#}
-            {#                score: 134,#}
-            {#            },#}
-            {#        ],#}
-            {#    ], // fim primeira ronda#}
-            {#    [#}
-            {#        [#}
-            {#            {#}
-            {#                name: "Erik Zettersten",#}
-            {#                id: "erik-zettersten",#}
-            {#                seed: 1,#}
-            {#                score: 134,#}
-            {#            },#}
-            {#            {#}
-            {#                name: "James Coutry",#}
-            {#                id: "james-coutry",#}
-            {#                seed: 3,#}
-            {#                score: 134,#}
-            {#            },#}
-            {#        ],#}
-            {#        [#}
-            {#            {name: "Anothy Hopkins", id: "anthony-hopkins", seed: 5},#}
-            {#            {#}
-            {#                name: "Teddy Koufus",#}
-            {#                id: "teddy-koufus",#}
-            {#                seed: 8,#}
-            {#                score: 134,#}
-            {#            },#}
-            {#        ],#}
-            {#        [#}
-            {#            {name: "Ryan Anderson", id: "ryan-anderson", seed: 10},#}
-            {#            {#}
-            {#                name: "Scott Anderson",#}
-            {#                id: "scott-anderson",#}
-            {#                seed: 12,#}
-            {#                score: 134,#}
-            {#            },#}
-            {#        ],#}
-            {#        [#}
-            {#            {name: "Sammy Zetters", id: "sammy-zettersten", seed: 14},#}
-            {#            {#}
-            {#                name: "Jake Coutry",#}
-            {#                id: "jake-coutry",#}
-            {#                seed: 15,#}
-            {#            },#}
-            {#        ],#}
-            {#    ], // fim segunda ronda#}
-            {#    [#}
-            {#        [#}
-            {#            {name: "Erik Zettersten", id: "erik-zettersten", seed: 1},#}
-            {#            {#}
-            {#                name: "Anothy Hopkins",#}
-            {#                id: "anthony-hopkins",#}
-            {#                seed: 5,#}
-            {#            },#}
-            {#        ],#}
-            {#        [#}
-            {#            {name: "Ryan Anderson", id: "ryan-anderson", seed: 10, score: 1},#}
-            {#            {#}
-            {#                name: "Sammy Zetters",#}
-            {#                id: "sammy-zettersten",#}
-            {#                seed: 14,#}
-            {#            },#}
-            {#        ],#}
-            {#    ], // fim terceira ronda#}
-            {#    [#}
-            {#        [#}
-            {#            {name: "Erik Zettersten", id: "erik-zettersten", seed: 1},#}
-            {#            {#}
-            {#                name: "Ryan Anderson",#}
-            {#                id: "ryan-anderson",#}
-            {#                seed: 10,#}
-            {#            },#}
-            {#        ],#}
-            {#    ], // fim quarta ronda#}
-            {#    [[{name: "Erik Zettersten", id: "erik-zettersten", seed: 1}]], // vencedor#}
-            {#];#}
-
-            // Fake Data
-            win.TestData = [
-                [
-                    [
+                            {% endfor %}
+                        ],
+                    {% endfor %}
+                    [[
                         {
-                            name: "Erik Zettersten",
-                            id: "erik-zettersten",
-                            seed: 1,
-                            score: 160,
-                        },
-                        {
-                            name: "Andrew Miller",
-                            id: "andrew-miller",
-                            seed: 2,
-                            score: 122,
-                        },
+                            name: "{{ winner | default_if_none:'' }}",
+                            score: "",
+                        }
                     ],
-                    [
-                        {
-                            name: "James Coutry",
-                            id: "james-coutry",
-                            seed: 3,
-                            score: 134,
-                        },
-                        {
-                            name: "Sam Merrill",
-                            id: "sam-merrill",
-                            seed: 4,
-                            score: 134,
-                        },
                     ],
-                    [
-                        {
-                            name: "Anothy Hopkins",
-                            id: "anthony-hopkins",
-                            seed: 5,
-                            score: 134,
-                        },
-                        {
-                            name: "Everett Zetters",
-                            id: "everett-zettersten",
-                            seed: 6,
-                            score: 134,
-                        },
-                    ],
-                    [
-                        {
-                            name: "John Scott",
-                            id: "john-scott",
-                            seed: 7,
-                            score: 134,
-                        },
-                        {
-                            name: "Teddy Koufus",
-                            id: "teddy-koufus",
-                            seed: 8,
-                            score: 134,
-                        },
-                    ],
-                ], // fim primeira ronda
-                [
-                    [
-                        {
-                            name: "Erik Zettersten",
-                            id: "erik-zettersten",
-                            seed: 1,
-                            score: 134,
-                        },
-                        {
-                            name: "James Coutry",
-                            id: "james-coutry",
-                            seed: 3,
-                            score: 134,
-                        },
-                    ],
-                    [
-                        {
-                            name: "Anothy Hopkins",
-                            id: "anthony-hopkins",
-                            seed: 5
-                        },
-                        {
-                            name: "Teddy Koufus",
-                            id: "teddy-koufus",
-                            seed: 8,
-                            score: 134,
-                        },
-                    ],
-                ], // fim segunda ronda
-                [
-                    [
-                        {name: "Erik Zettersten", id: "erik-zettersten", seed: 1},
-                        {
-                            name: "Anothy Hopkins",
-                            id: "anthony-hopkins",
-                            seed: 5,
-                        },
-                    ],
-                ], // fim terceira ronda
-                [[{name: "Erik Zettersten", id: "erik-zettersten", seed: 1}]], // vencedor
-            ];
+                ];
+                $(".my_gracket").gracket({src: win.Data});
+            })(window, document, jQuery);
+        </script>
+        <script>
+            var all = $(".team_div").filter(function () {
+                var h3 = $(this).find('h3');
+                var div = $(h3).find('div')
+                return $.trim(div.text()) === "";
+            }).get();
+            all.map(
+                x => {
+                    color = "#241F3878"
+                    score_div = x.getElementsByClassName("score_div")[0]
+                    x.style.backgroundColor =  color
+                    score_div.style.backgroundColor = color
+                }
+            )
 
-
-            {#// Fake Data#}
-            {#win.TestData = [#}
-            {#    [#}
-            {#        [#}
-            {#            {#}
-            {#                name: "Erik Zettersten",#}
-            {#                id: "erik-zettersten",#}
-            {#                seed: 1,#}
-            {#                score: 160,#}
-            {#            },#}
-            {#            {#}
-            {#                name: "Andrew Miller",#}
-            {#                id: "andrew-miller",#}
-            {#                seed: 2,#}
-            {#                score: 122,#}
-            {#            },#}
-            {#            {#}
-            {#                name: "Andrew Miller",#}
-            {#                id: "andrew-miller",#}
-            {#                seed: 2,#}
-            {#                score: 122,#}
-            {#            },#}
-            {#            {#}
-            {#                name: "Andrew Miller",#}
-            {#                id: "andrew-miller",#}
-            {#                seed: 2,#}
-            {#                score: 122,#}
-            {#            },#}
-            {#            {#}
-            {#                name: "Andrew Miller",#}
-            {#                id: "andrew-miller",#}
-            {#                seed: 2,#}
-            {#                score: 122,#}
-            {#            },#}
-            {#            {#}
-            {#                name: "Andrew Miller",#}
-            {#                id: "andrew-miller",#}
-            {#                seed: 2,#}
-            {#                score: 122,#}
-            {#            },#}
-            {#            {#}
-            {#                name: "Andrew Miller",#}
-            {#                id: "andrew-miller",#}
-            {#                seed: 2,#}
-            {#                score: 122,#}
-            {#            },#}
-            {#            {#}
-            {#                name: "Andrew Miller",#}
-            {#                id: "andrew-miller",#}
-            {#                seed: 2,#}
-            {#                score: 122,#}
-            {#            },#}
-            {#            {#}
-            {#                name: "Andrew Miller",#}
-            {#                id: "andrew-miller",#}
-            {#                seed: 2,#}
-            {#                score: 122,#}
-            {#            },#}
-            {#            {#}
-            {#                name: "Andrew Miller",#}
-            {#                id: "andrew-miller",#}
-            {#                seed: 2,#}
-            {#                score: 122,#}
-            {#            },#}
-            {#            {#}
-            {#                name: "Andrew Miller",#}
-            {#                id: "andrew-miller",#}
-            {#                seed: 2,#}
-            {#                score: 122,#}
-            {#            },#}
-            {#            {#}
-            {#                name: "Andrew Miller",#}
-            {#                id: "andrew-miller",#}
-            {#                seed: 2,#}
-            {#                score: 122,#}
-            {#            },#}
-            {#            {#}
-            {#                name: "Andrew Miller",#}
-            {#                id: "andrew-miller",#}
-            {#                seed: 2,#}
-            {#                score: 122,#}
-            {#            },#}
-            {#            {#}
-            {#                name: "Andrew Miller",#}
-            {#                id: "andrew-miller",#}
-            {#                seed: 2,#}
-            {#                score: 122,#}
-            {#            },#}
-            {#            {#}
-            {#                name: "Andrew Miller",#}
-            {#                id: "andrew-miller",#}
-            {#                seed: 2,#}
-            {#                score: 122,#}
-            {#            },#}
-            {#            {#}
-            {#                name: "Andrew Miller",#}
-            {#                id: "andrew-miller",#}
-            {#                seed: 2,#}
-            {#                score: 122,#}
-            {#            },#}
-            {#            {#}
-            {#                name: "Andrew Miller",#}
-            {#                id: "andrew-miller",#}
-            {#                seed: 2,#}
-            {#                score: 122,#}
-            {#            },#}
-            {#            {#}
-            {#                name: "Andrew Miller",#}
-            {#                id: "andrew-miller",#}
-            {#                seed: 2,#}
-            {#                score: 122,#}
-            {#            },#}
-            {#            {#}
-            {#                name: "Andrew Miller",#}
-            {#                id: "andrew-miller",#}
-            {#                seed: 2,#}
-            {#                score: 122,#}
-            {#            },#}
-            {#            {#}
-            {#                name: "Andrew Miller",#}
-            {#                id: "andrew-miller",#}
-            {#                seed: 2,#}
-            {#                score: 122,#}
-            {#            },#}
-            {#            {#}
-            {#                name: "Andrew Miller",#}
-            {#                id: "andrew-miller",#}
-            {#                seed: 2,#}
-            {#                score: 122,#}
-            {#            },#}
-            {#            {#}
-            {#                name: "Andrew Miller",#}
-            {#                id: "andrew-miller",#}
-            {#                seed: 2,#}
-            {#                score: 122,#}
-            {#            },#}
-            {#        ],#}
-            {#    ],#}
-            {#    [[{name: "Erik Zettersten", id: "erik-zettersten", seed: 1}]], // vencedor#}
-            {##}
-            {#]#}
-
-
-            // initializer
-            $(".my_gracket").gracket({src: win.TestData});
-        })(window, document, jQuery);
-    </script>
-
-    <style>
-        {#Place the winner at the top#}
-        {#.g_round .g_winner {#}
-        {#    margin-top: 0 !important;#}
-        {#    padding-top: 0;#}
-        {##}
-        {#}#}
-    </style>
-
+        </script>
+    {% endif %}
+    {% if t_type == "SOLO" %}
+        <style>
+            .g_round .g_winner {
+                margin-top: 0 !important;
+                padding-top: 0;
+            }
+        </style>
+    {% endif %}
 {% endblock %}
