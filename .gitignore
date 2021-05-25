@@ -11,3 +11,5 @@ register/migrations/__pycache__/
 IW/migrations/
 .env
 IselWinner/iwdatabase.sql
+test.py
+media/
