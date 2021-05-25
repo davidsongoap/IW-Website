@@ -51,7 +51,7 @@ class Tournament(models.Model):
     name = models.CharField(max_length=30, null=False)
     password = models.CharField(max_length=25, null=True)
     max_players = models.IntegerField(null=True, blank=True)
-    start_date = models.DateField()
+    start_date = models.DateTimeField()
     winner_id = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL, related_name="winner")
     full = models.BooleanField(default=False)
     description = models.TextField(null=True, blank=True)
@@ -65,6 +65,11 @@ class Tournament(models.Model):
                                                                                                self.admin_id,
                                                                                                self.visibility,
                                                                                                self.state)
+
+class Participation(models.Model):
+    id = models.AutoField(primary_key=True)
+    tournament_id = models.ForeignKey(Tournament, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
 class Game(models.Model):
@@ -108,10 +113,10 @@ class Match(models.Model):
     id = models.AutoField(primary_key=True)
     num = models.IntegerField()
     tournament_id = models.ForeignKey(Tournament, on_delete=models.CASCADE)
-    round = models.IntegerField()
+    # round = models.IntegerField()
 
     def __str__(self):
-        return 'Match (num={} | tournament_id={} | round={})'.format(self.num, self.tournament_id, self.round)
+        return 'Match (num={} | tournament_id={})'.format(self.num, self.tournament_id)
 
 
 class User_Match(models.Model):
