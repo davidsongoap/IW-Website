@@ -3,11 +3,11 @@
 
         <svg width="25" height="25" viewBox="0 0 300 350" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd"
-                  d="M88.8885 88.8885V299.999L0 211.11V0L88.8885 88.8885ZM211.111 0.00061512H0.000915527L88.8894 88.8891H300L211.111 0.00061512Z"
-                  fill="#E84545"></path>
+                d="M88.8885 88.8885V299.999L0 211.11V0L88.8885 88.8885ZM211.111 0.00061512H0.000915527L88.8894 88.8891H300L211.111 0.00061512Z"
+                fill="#E84545"></path>
             <path fill-rule="evenodd" clip-rule="evenodd"
-                  d="M211.112 211.111L211.112 0.0012207L300 88.8897V300L211.112 211.111ZM88.889 299.999H299.999L211.111 211.111L0.000488281 211.111L88.889 299.999Z"
-                  fill="#FBFBFB"></path>
+                d="M211.112 211.111L211.112 0.0012207L300 88.8897V300L211.112 211.111ZM88.889 299.999H299.999L211.111 211.111L0.000488281 211.111L88.889 299.999Z"
+                fill="#FBFBFB"></path>
         </svg>
         <a id="site-name-span" href="/">
             <span id="first-part">ISEL</span>
@@ -15,9 +15,9 @@
         </a>
     </div>
     {% if t.name %}
-        <div id="tourn-name">
-            <div class="item">{{ t.name }}</div>
-        </div>
+    <div id="tourn-name">
+        <div class="item">{{ t.name }}</div>
+    </div>
     {% endif %}
     <div class="right menu">
         {# search field #}
@@ -29,9 +29,10 @@
                         <input type="text" required placeholder="Tournament code" name="t_code">
                         <button type="submit" class="ui icon button">
                             <svg width="18" height="18" viewBox="0 0 19 19" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path d="M15.4567 7.90932L2.26017 0.519334C2.03813 0.395002 1.78343 0.341401 1.53011 0.365695C1.27679 0.389989 1.03692 0.491021 0.842559 0.655287C0.648195 0.819553 0.508596 1.03923 0.44242 1.28495C0.376243 1.53068 0.386641 1.79075 0.472225 2.03041L2.73816 8.37502H8.62507C8.79083 8.37502 8.9498 8.44086 9.06701 8.55807C9.18422 8.67528 9.25007 8.83426 9.25007 9.00002C9.25007 9.16578 9.18422 9.32475 9.06701 9.44196C8.9498 9.55917 8.79083 9.62502 8.62507 9.62502H2.73816L0.472225 15.9696C0.405237 16.1582 0.384397 16.3601 0.41145 16.5584C0.438503 16.7567 0.51266 16.9457 0.627717 17.1094C0.742774 17.2732 0.895382 17.407 1.07277 17.4997C1.25016 17.5924 1.44716 17.6412 1.6473 17.6421C1.86208 17.6417 2.07314 17.5862 2.26025 17.4807L15.4566 10.0907C15.6505 9.98214 15.8119 9.82384 15.9242 9.63214C16.0366 9.44044 16.0958 9.22225 16.0958 9.00004C16.0959 8.77783 16.0366 8.55964 15.9243 8.36793C15.8119 8.17621 15.6505 8.01791 15.4567 7.90932Z"
-                                      fill="#FBFBFB" fill-opacity="0.81"></path>
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M15.4567 7.90932L2.26017 0.519334C2.03813 0.395002 1.78343 0.341401 1.53011 0.365695C1.27679 0.389989 1.03692 0.491021 0.842559 0.655287C0.648195 0.819553 0.508596 1.03923 0.44242 1.28495C0.376243 1.53068 0.386641 1.79075 0.472225 2.03041L2.73816 8.37502H8.62507C8.79083 8.37502 8.9498 8.44086 9.06701 8.55807C9.18422 8.67528 9.25007 8.83426 9.25007 9.00002C9.25007 9.16578 9.18422 9.32475 9.06701 9.44196C8.9498 9.55917 8.79083 9.62502 8.62507 9.62502H2.73816L0.472225 15.9696C0.405237 16.1582 0.384397 16.3601 0.41145 16.5584C0.438503 16.7567 0.51266 16.9457 0.627717 17.1094C0.742774 17.2732 0.895382 17.407 1.07277 17.4997C1.25016 17.5924 1.44716 17.6412 1.6473 17.6421C1.86208 17.6417 2.07314 17.5862 2.26025 17.4807L15.4566 10.0907C15.6505 9.98214 15.8119 9.82384 15.9242 9.63214C16.0366 9.44044 16.0958 9.22225 16.0958 9.00004C16.0959 8.77783 16.0366 8.55964 15.9243 8.36793C15.8119 8.17621 15.6505 8.01791 15.4567 7.90932Z"
+                                    fill="#FBFBFB" fill-opacity="0.81"></path>
                             </svg>
                         </button>
                     </div>
@@ -40,37 +41,41 @@
         </div>
 
         {% if user.is_authenticated %}
-            <div style="text-align: center" class="item fitted ui  icon top left pointing dropdown">
-                <i class="icons">
-                    <i class="bell icon"></i>
-                    <i class="bottom right corner red circle large icon"></i>
-                </i>
-                <div style="background-color: var(--dark-bg)" class="menu">
-                    <div style="background-color: var(--dark-bg);  color: black" class="large header">Invites</div>
-                    <div class="ui divider"></div>
-                    <div class="item">
-                        <span style="font-size: 20px; color: black" class="text">Isel ChampionShip Series</span>
-                        <div style="padding: 0" class="ui  menu">
-                            {#                              <button style="float: left; width: 50%" class="ui small inverted green button">Accept</button>#}
-                            {#                            <button  style="float: left; width: 50%" class="ui small inverted red button">Decline</button>#}
-                            <div class="ui small basic green button">Approve</div>
-                            <div class="ui small basic red button">Decline</div>
-                        </div>
+        <div style="text-align: center" class="item fitted ui  icon top left pointing dropdown">
+            <!-- <i class="icons"> -->
+            <!--     <i class="bell icon"></i> -->
+            <!--     <i class="bottom right corner red circle large icon"></i> -->
+            <!-- </i> -->
+            <div style="background-color: var(--dark-bg)" class="menu">
+                <div style="background-color: var(--dark-bg);  color: black" class="large header">Invites</div>
+                <div class="ui divider"></div>
+                <div class="item">
+                    <span style="font-size: 20px; color: black" class="text">Isel ChampionShip Series</span>
+                    <div style="padding: 0" class="ui  menu">
+                        {#                              <button style="float: left; width: 50%" class="ui small inverted green button">Accept</button>#}
+                        {#                            <button  style="float: left; width: 50%" class="ui small inverted red button">Decline</button>#}
+                        <div class="ui small basic green button">Approve</div>
+                        <div class="ui small basic red button">Decline</div>
                     </div>
                 </div>
             </div>
+        </div>
 
 
-            <div class="item fitted">{{ user.username|default:"{guest}" }}</div>
-            <div class="item fitted">
-                <i class="user circle outline white icon large"></i>
-            </div>
+        <div class="item fitted">{{ user.username|default:"{guest}" }}</div>
+        <div class="item fitted">
+            <i class="user circle outline white icon large"></i>
+        </div>
+                <form action="/logout" class="">
+            <button id="" style="padding: 8px 10px 8px 10px;" type="submit" class="ui right inverted red load-button button">Logout
+            </button>
+        </form>
         {% else %}
 
-            <form action="/login" class="">
-                <button id="" type="submit" class="ui right inverted red button">Login
-                </button>
-            </form>
+        <form action="/login" class="">
+            <button id="" style="padding: 8px 50px 8px 50px;" type="submit" class="ui right inverted blue load-button button">Login
+            </button>
+        </form>
         {% endif %}
     </div>
 </div>

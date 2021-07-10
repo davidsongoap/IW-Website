@@ -5,7 +5,6 @@ import random
 import string
 from django.contrib.auth.decorators import login_required, user_passes_test
 from PIL import Image
-from IselWinner.settings import MEDIA_URL
 
 
 # Create your views here.

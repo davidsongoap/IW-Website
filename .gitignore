@@ -9,6 +9,7 @@ rgit.bat
 __pycache__/
 register/migrations/__pycache__/
 IW/migrations/
+IW/user_info/
 .env
 IselWinner/iwdatabase.sql
 test.py

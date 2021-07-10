@@ -17,7 +17,7 @@
                 <form method="POST" class="ui form">
                     {% csrf_token %}
                     {{ form|crispy }}
-                    <button id="submit-button" type="submit" class="ui button">{% block button-text %}{button text
+                    <button id="submit-button" type="submit" class="ui load-button button">{% block button-text %}{button text
                         here}{% endblock %}</button>
                 </form>
                 {% block extra %}
