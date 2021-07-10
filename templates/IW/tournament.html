@@ -77,11 +77,12 @@
                             <div style="text-align: center">
                                 {% if state == "EN" %}
                                     <button id="menu-button"
-                                            class=" ui inverted large disabled gray  button">Closed
+                                            class=" ui inverted large disabled gray load-button button">Ended
                                     </button>
                                 {% elif state == "ST" %}
                                     <button id="menu-button"
-                                            class=" ui inverted large disabled gray  button">In Progress
+                                            class=" ui inverted large disabled gray load-button  button">In
+                                        Progress
                                     </button>
                                 {% endif %}
 
@@ -93,7 +94,7 @@
                                                 <form method="POST" action="">
                                                     {% csrf_token %}
                                                     <button id="menu-button"
-                                                            class=" ui inverted large red button"> Enroll
+                                                            class=" ui inverted large red load-button button"> Enroll
                                                     </button>
                                                     <input type="hidden" id="current-state" name="current-state"
                                                            value="Enroll">
@@ -102,7 +103,8 @@
                                                 <form method="POST" action="">
                                                     {% csrf_token %}
                                                     <button id="menu-button"
-                                                            class=" ui inverted large red button"> Cancel Enroll
+                                                            class=" ui inverted large red load-button button"> Cancel
+                                                        Enroll
                                                     </button>
                                                     <input type="hidden" id="current-state" name="current-state"
                                                            value="CancelEnroll">
@@ -111,15 +113,22 @@
 
                                         </form>
                                     {% elif state == "CL" %}
-                                        <button id="menu-button"
-                                                class=" ui inverted large disabled gray  button">Waiting to Start
-                                        </button>
+                                        <form method="POST" action="">
+                                            {% csrf_token %}
+                                            <button id="menu-button" class=" ui inverted large disabled gray  button">
+                                                Waiting to Start
+                                            </button>
+                                            <button type="submit" id="menu-button"
+                                                    class=" ui inverted large blue button">Download Game
+                                            </button>
+                                            <input type="hidden" id="current-state" name="current-state" value="DL">
+                                        </form>
                                     {% endif %}
                                     {% if user.id == owner.id %}
                                         <form method="POST" action="">
                                             {% csrf_token %}
                                             <button type="submit" id="menu-button"
-                                                    class=" ui inverted large white button">Edit
+                                                    class="ui inverted large white button">Edit
                                             </button>
                                             <input type="hidden" id="current-state" name="current-state" value="Edit">
                                         </form>
@@ -127,23 +136,23 @@
                                             <form method="POST" action="">
                                                 {% csrf_token %}
                                                 <button id="menu-button"
-                                                        class=" ui inverted large green button">Open Enrollments
+                                                        class=" ui inverted large green load-button button">Open
+                                                    Enrollments
                                                 </button>
                                                 <input type="hidden" id="current-state" name="current-state" value="OP">
                                             </form>
                                         {% elif state == 'OP' %}
-                                            <button id="menu-button"
-                                                    class=" ui inverted large disabled gray  button">Waiting For Players
+                                            <button id="menu-button" class=" ui inverted large disabled gray  button">
+                                                Waiting For Players
                                             </button>
                                         {% endif %}
                                         {% if state == 'CL' or t_type == 'SOLO' and player_count >= 2 %}
                                             <form method="POST" action="">
                                                 {% csrf_token %}
                                                 <button id="menu-button"
-                                                        class=" ui inverted large  green  button">Start
+                                                        class=" ui inverted large  green load-button button">Start
                                                 </button>
-                                                <input type="hidden" id="current-state" name="current-state"
-                                                       value="ST">
+                                                <input type="hidden" id="current-state" name="current-state" value="ST">
                                             </form>
                                         {% endif %}
                                     {% endif %}
@@ -155,12 +164,10 @@
                 </div>
             </div>
 
-            {% if state == 'ST' %}
+            {% if state == 'ST' or state == 'EN' %}
                 <div style=" flex: 0 0 100px">
-                    <div
-                            style="width: max-content; padding-right: 0; float: left; overflow-x:visible "
-                            class="my_gracket"
-                    ></div>
+                    <div style="width: max-content; padding-right: 0; float: left; overflow-x:visible "
+                         class="my_gracket"></div>
                 </div>
             {% elif state != 'ST' %}
                 <div id="error_message2">This tournament hasn't started yet.</div>
@@ -181,7 +188,9 @@
 
     <script type="text/javascript" src="{% static '/js/jquery.gracket.js' %}"></script>
 
-    {% if state == 'ST' %}
+
+
+    {% if state == 'ST' or state == 'EN' %}
         <script type="text/javascript">
             (function (win, doc, $) {
                 win.Data = [
@@ -201,15 +210,17 @@
                             {% endfor %}
                         ],
                     {% endfor %}
-                    [[
-                        {
+                    [
+                        [{
                             name: "{{ winner | default_if_none:'' }}",
                             score: "",
-                        }
+                        }],
                     ],
-                    ],
-                ];
-                $(".my_gracket").gracket({src: win.Data});
+                ]
+                ;
+                $(".my_gracket").gracket({
+                    src: win.Data
+                });
             })(window, document, jQuery);
         </script>
         <script>
@@ -222,11 +233,10 @@
                 x => {
                     color = "#241F3878"
                     score_div = x.getElementsByClassName("score_div")[0]
-                    x.style.backgroundColor =  color
+                    x.style.backgroundColor = color
                     score_div.style.backgroundColor = color
                 }
             )
-
         </script>
     {% endif %}
     {% if t_type == "SOLO" %}
