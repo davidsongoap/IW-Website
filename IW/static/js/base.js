@@ -9,8 +9,8 @@ $(document).ready(function () {
         }
     });
 
-    $('.button').click(function () {
-        // this.addClass('loading')
+    $('.load-button').click(function () {
          $(this).addClass("loading");
     });
 });
+

@@ -1,10 +1,11 @@
 ##### Signals #####
+import hashlib
 import random
 import string
 
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from IW.models import ConfirmationCode, ProfileImage, Participation, Tournament
+from IW.models import ConfirmationCode, ProfileImage, Participation, Tournament, HashId
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from IW.views import is_tournament_full
@@ -17,9 +18,12 @@ def login_logger(sender, instance, created, **kwargs):
         if instance.is_superuser:
             cc.validated = True
         pi = ProfileImage(user=instance)
+        hashID = get_HashID(instance)
+        hs = HashId(user=instance, hashID=hashID)
 
         pi.save()
         cc.save()
+        hs.save()
 
         # TODO email with html
         send_mail(
@@ -29,6 +33,14 @@ def login_logger(sender, instance, created, **kwargs):
             recipient_list=[instance.email],
             fail_silently=False
         )
+
+
+def get_HashID(user):
+    username = user.username
+    email = user.email
+    s = username + email
+    encoded = s.encode()
+    return str(hashlib.md5(encoded).hexdigest())
 
 
 @receiver(post_save, sender=Participation)

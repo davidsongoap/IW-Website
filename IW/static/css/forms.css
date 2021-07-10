@@ -58,7 +58,6 @@
 }
 
 
-
 #container-create-tournament-dir {
     width: 100%;
     padding: 0 15% 1% 15%;
@@ -118,13 +117,14 @@
     border-radius: 10px;
 }
 
-select option{
+select option {
     height: 20px;
     zoom: 1.2;
     /*padding: 10px;*/
 }
-option{
-    outline:none
+
+option {
+    outline: none
 }
 
 #submit-button {
@@ -145,12 +145,12 @@ option{
     padding-right: 10%;
 }
 
-.xdsoft_date div, .xdsoft_label span, .xdsoft_label div{
+.xdsoft_date div, .xdsoft_label span, .xdsoft_label div {
     color: black;
     font-weight: normal;
 }
 
-#campos{
+#campos {
     display: block;
     font-size: 1.2vw;
     margin-bottom: 10px;
@@ -195,11 +195,11 @@ option{
         font-size: 2vmax;
     }
 
-    #container-create-tournament{
+    #container-create-tournament {
         width: 80%;
     }
 
-    #campos{
+    #campos {
         font-size: 2vw;
     }
 }
@@ -212,8 +212,8 @@ option{
         background-image: linear-gradient(160deg, #100000 0%, #211c36 100%);
     }
 
-    #container, #container-create-tournament{
-        top:0;
+    #container, #container-create-tournament {
+        top: 0;
         bottom: 0;
         height: 100%;
         width: 100%;
@@ -222,14 +222,14 @@ option{
     }
 
     #container-esq, #container-create-tournament {
-        border-radius:0
+        border-radius: 0
     }
 
     #container-create-top {
         padding-top: 13%;
     }
 
-    #campos{
+    #campos {
         font-size: 3vw;
     }
 }
