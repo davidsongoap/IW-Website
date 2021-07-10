@@ -1,11 +1,18 @@
 from django.shortcuts import render, redirect
 from .models import *
 from django.core.exceptions import *
-import math
-import random
 
+import random
+import os
+import json
+from django.conf import settings
+from zipfile import ZipFile
+from django.conf import settings
+from django.http import HttpResponse, Http404
+import socket
 
 # Create your views here.
+
 def home(response):
     args = {}
     return render(response, "IW/home.html", args, )
@@ -31,7 +38,8 @@ def tournaments(response):
 
 def tournament(response, code):
     if response.method == "POST":
-        handle_tournament_page_post(response, code)
+        r = handle_tournament_page_post(response, code)
+        if r != None: return r
         return redirect("/tournament/" + code)
     user = response.user
 
@@ -55,13 +63,13 @@ def tournament(response, code):
 
     is_owner = user.id == t.admin_id
     game = t.tournament_game_set.all()[0].game_id
-    participants = t.participation_set.all()
+    # participants = t.participation_set.all()
 
     # all tournament matches
     all_match_list = []
     for match in t.match_set.all():
         match_list = []
-        print(match.user_match_set.all().count())
+        # print(match.user_match_set.all().count())
 
         if match.user_match_set.all().count() == 0:
             # match that doesn't have players yet
@@ -99,7 +107,7 @@ def tournament(response, code):
 
     already_enrolled = t.participation_set.filter(user_id=user.id).exists()
 
-    print(all_match_list)
+    # print(all_match_list)
 
     args["t"] = t
     args["t_type"] = t_type
@@ -116,6 +124,16 @@ def tournament(response, code):
     return render(response, "IW/tournament.html", args)
 
 
+def download_game(request, code):
+    zip_path = f"{settings.BASE_DIR}/IW/user_info/{request.user}/cred/cred.zip"
+
+    if os.path.exists(zip_path):
+        with open(zip_path, 'rb') as fh:
+            response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
+            response['Content-Disposition'] = 'inline; filename=' + os.path.basename(zip_path)
+            return response
+    raise Http404
+
 ################### Utility Functions ########################
 
 def reorganize_matches(match_list, n_players, players_per_match):
@@ -131,7 +149,8 @@ def reorganize_matches(match_list, n_players, players_per_match):
             i = 0
         i += 1
         temp.append(match)
-        if n_players == 1: new_list.append(temp)
+        if n_players == 1:
+            new_list.append(temp)
     return new_list
 
 
@@ -172,22 +191,28 @@ def generate_duel(t, participants, n_matches):
         p1 = participants.pop().user_id
         p2 = participants.pop().user_id
         m = Match.objects.get(tournament_id=t, num=i)
+        # m.isReady = True
+
         m_p1 = User_Match(user_id=p1, match_id=m)
         m_p2 = User_Match(user_id=p2, match_id=m)
         m_p1.save()
         m_p2.save()
+        m.save()
         i += 1
 
 
 def handle_tournament_page_post(response, code):
     post = response.POST
     cur_state = post["current-state"]
+
     if cur_state == "Edit":
         pass
     elif cur_state == "Enroll":
-        enroll(response, code)
+        return enroll(response, code)
+    elif cur_state == "DL":
+        return download_cred(response, code)
     elif cur_state == "CancelEnroll":
-        cancel_enroll(response, code)
+        return cancel_enroll(response, code)
     else:
         t = Tournament.objects.get(code=code)
         t.state = cur_state
@@ -196,13 +221,61 @@ def handle_tournament_page_post(response, code):
             start_tournament(t)
 
 
+def download_cred(response, code):
+    t = Tournament.objects.get(code=code)
+    user_path = f"{settings.BASE_DIR}/IW/user_info/{response.user}/cred/cred.json"
+    run_path = f"{settings.BASE_DIR}/IW/user_info/{response.user}/run.bat"
+    game_file_path = t.tournament_game_set.all()[0].game_id.file
+    game_file_full_path = f"{settings.BASE_DIR}\\media\\{t.tournament_game_set.all()[0].game_id.file}"
+
+    if not os.path.exists(user_path):
+        try:
+            os.makedirs(os.path.dirname(user_path))
+        except Exception:
+            pass
+    if not os.path.exists(run_path):
+        try:
+            os.makedirs(os.path.dirname(run_path))
+        except Exception:
+            pass
+    cred = {}
+
+    game_name = str(t.tournament_game_set.all()[0].game_id.name).replace(" ", "")
+
+    cred["login"] = response.user.hashid.hashID
+    cred["code"] = code
+
+    hostname = socket.gethostname()
+    local_ip = socket.gethostbyname(hostname)
+
+    cred["serv_ip"] = local_ip
+
+    with open(user_path, "w") as f:
+        json.dump(cred, f)
+
+    with open(run_path, "w") as f:
+        f.write('@echo off\n')
+        f.write('java -jar IW-Game.jar')
+
+    zip_path = f"{settings.BASE_DIR}/IW/user_info/{response.user}/cred/{game_name}.zip"
+    zipObj = ZipFile(zip_path, 'w')
+    zipObj.write(user_path, "cred.json")
+    zipObj.write(run_path, "run.bat")
+    zipObj.write(game_file_full_path, str(game_file_path).split("/")[-1])
+    zipObj.close()
+
+    with open(zip_path, 'rb') as fh:
+        response = HttpResponse(fh.read(), content_type="application/force-download")
+        response['Content-Disposition'] = 'inline; filename=' + os.path.basename(zip_path)
+        return response
+
 def is_tournament_full(t):
-    if t.state == 'ST' or t.state == "CL": return True
+    if t.state == 'ST' or t.state == "CL":
+        return True
     if t.max_players == -1:
         is_full = False
     else:
-        is_full =  t.participation_set.all().count() >= t.max_players
-
+        is_full = t.participation_set.all().count() >= t.max_players
     return is_full
 
 
