@@ -38,7 +38,13 @@ START_DATE_CHOICES = (
 
 
 class RegisterForm(UserCreationForm):
-    email = forms.EmailField()
+    email = forms.EmailField(required=True)
+
+    ## Reject repeated emails
+    # def clean_email(self):
+    #     if User.objects.filter(email=self.cleaned_data['email']).exists():
+    #         raise forms.ValidationError("the given email is already registered")
+    #     return self.cleaned_data['email']
 
     class Meta:
         model = User
@@ -54,7 +60,7 @@ class RegisterForm(UserCreationForm):
         self.fields['password1'].widget = forms.PasswordInput(attrs={'placeholder': 'Password*'})
         self.fields['password1'].label = False
         self.fields['password1'].help_text = None
-        self.fields['password2'].widget = forms.PasswordInput(attrs={'placeholder': 'Repetir Password*'})
+        self.fields['password2'].widget = forms.PasswordInput(attrs={'placeholder': 'Repeat Password*'})
         self.fields['password2'].label = False
         self.fields['password2'].help_text = None
 
